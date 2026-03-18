@@ -21,7 +21,10 @@ export default function Header() {
             {/* NAV */}
             <nav className={`nav ${open ? "active" : ""}`}>
                 <a href="#hero" onClick={() => setOpen(false)}>Home</a>
+
                 <a href="#services" onClick={() => setOpen(false)}>Services</a>
+                <a href="#Product" onClick={() => setOpen(false)}>Products</a>
+
                 <a href="#service-area" onClick={() => setOpen(false)}>Area</a>
                 <a href="#about" onClick={() => setOpen(false)}>About</a>
                 <a href="#contact" onClick={() => setOpen(false)}>Contact</a>

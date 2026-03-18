@@ -2,7 +2,7 @@ const styles = `
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
   .hero-wrap {
-    background: #f8f9fa;
+    background: #c3daf1;
     min-height: 88vh;
     display: flex;
     align-items: center;

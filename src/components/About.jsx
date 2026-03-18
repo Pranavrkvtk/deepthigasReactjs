@@ -563,7 +563,7 @@ export default function About() {
           <div className="ab-title-wrapper">
             <p className="ab-tag">Who We Are</p>
             <h2 className="ab-title">
-              About <em>Deepthy</em> Gas Agencies
+              About <em>Deepthi</em> Gas Agencies
             </h2>
           </div>
           <p className="ab-subtitle">
