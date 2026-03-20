@@ -8,6 +8,7 @@ import About from "./components/About";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import Product from "./components/Product";
+import ChatBot from "./components/ChatBot";
 
 const styles = `
   @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,600&family=DM+Sans:wght@300;400;500&display=swap');
@@ -229,7 +230,6 @@ export default function App() {
 
         </main>
 
-        {/* FLOATING CALL BUTTON */}
         <a href="tel:+918078801349" className="floating-call">
           <span className="floating-call-icon">
             <svg viewBox="0 0 24 24">
@@ -239,6 +239,8 @@ export default function App() {
           Call Now
         </a>
 
+
+`        <ChatBot />`
         <Footer />
       </div>
     </>
