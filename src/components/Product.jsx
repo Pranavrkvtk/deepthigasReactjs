@@ -382,31 +382,31 @@ const css = `
 `
 
 const products = [
-  { img: "p2.jpeg",  name: "Butterfly Galaxy 3B Manual Glasstop Gas Stove", desc: "3 Burner Glass Top Gas Stove",  price: "₹4,500",  category: "stoves",      rating: 4.5, badge: "Bestseller" },
-  { img: "p11.jpeg", name: "Butterfly Galaxy 2B Manual Glasstop Gas Stove", desc: "2 Burner Glass Top Gas Stove",  price: "₹3,500",  category: "stoves",      rating: 4.3, badge: "Popular" },
-  { img: "p7.jpeg",  name: "Butterfly 2B New Xtra Stainless Steel Stove",   desc: "2 Burner Steel Gas Stove",     price: "₹2,750",  category: "stoves",      rating: 4.4, badge: "Value" },
-  { img: "p10.jpeg", name: "HP Suraksha LPG Hose",                          desc: "1.5 Meter Safety Hose",        price: "₹190",    category: "accessories", rating: 4.8, badge: "Safety" },
-  { img: "p9.jpeg",  name: "Suraksha Flame Lighter",                        desc: "With 100ML Refill Bottle",     price: "₹250",    category: "accessories", rating: 4.2, badge: "New" },
-  { img: "p8.jpeg",  name: "Cylinder Trolley",                              desc: "Easy Movement Stand",          price: "₹210",    category: "accessories", rating: 4.1, badge: "Must Have" },
-  { img: "p3.jpeg",  name: "Kitchen Apron",                                 desc: "Protective Cooking Apron",     price: "₹350",    category: "kitchen",     rating: 4.0, badge: "New" },
-  { img: "p5.jpeg",  name: "HP 5KG Cylinder",                               desc: "Refill ₹537.50 | New ₹1412",   price: "Updated Feb 2026", category: "cylinders", rating: 5.0, badge: "Popular" },
-  { img: "p6.jpeg",  name: "Cook Top Stove 1 Burner",                       desc: "Compact Single Burner Stove",  price: "₹1,099",  category: "stoves",      rating: 4.2, badge: "Compact" },
-  { img: "p4.jpeg",  name: "HP Fire Extinguisher 500ML",                    desc: "Safety Fire Protection",       price: "₹600",    category: "safety",      rating: 4.9, badge: "Essential" },
+  { img: "p2.jpeg", name: "Butterfly Galaxy 3B Manual Glasstop Gas Stove", desc: "3 Burner Glass Top Gas Stove", price: "₹4,500", category: "stoves", rating: 4.5, badge: "Bestseller" },
+  { img: "p11.jpeg", name: "Butterfly Galaxy 2B Manual Glasstop Gas Stove", desc: "2 Burner Glass Top Gas Stove", price: "₹3,500", category: "stoves", rating: 4.3, badge: "Popular" },
+  { img: "p7.jpeg", name: "Butterfly 2B New Xtra Stainless Steel Stove", desc: "2 Burner Steel Gas Stove", price: "₹2,750", category: "stoves", rating: 4.4, badge: "Value" },
+  { img: "p10.jpeg", name: "HP Suraksha LPG Hose", desc: "1.5 Meter Safety Hose", price: "₹190", category: "accessories", rating: 4.8, badge: "Safety" },
+  { img: "p9.jpeg", name: "Suraksha Flame Lighter", desc: "With 100ML Refill Bottle", price: "₹250", category: "accessories", rating: 4.2, badge: "New" },
+  { img: "p8.jpeg", name: "Cylinder Trolley", desc: "Easy Movement Stand", price: "₹210", category: "accessories", rating: 4.1, badge: "Must Have" },
+  { img: "p3.jpeg", name: "Kitchen Apron", desc: "Protective Cooking Apron", price: "₹350", category: "kitchen", rating: 4.0, badge: "New" },
+  { img: "p5.jpeg", name: "HP 5KG Cylinder", desc: "Refill ₹537.50 | New ₹1412", price: "Updated Feb 2026", category: "cylinders", rating: 5.0, badge: "Popular" },
+  { img: "p6.jpeg", name: "Cook Top Stove 1 Burner", desc: "Compact Single Burner Stove", price: "₹1,099", category: "stoves", rating: 4.2, badge: "Compact" },
+  { img: "p4.jpeg", name: "HP Fire Extinguisher 500ML", desc: "Safety Fire Protection", price: "₹600", category: "safety", rating: 4.9, badge: "Essential" },
 ]
 
 const categories = [
-  { id: "all",         name: "All" },
-  { id: "stoves",      name: "Stoves" },
-  { id: "cylinders",   name: "Cylinders" },
+  { id: "all", name: "All" },
+  { id: "stoves", name: "Stoves" },
+  { id: "cylinders", name: "Cylinders" },
   { id: "accessories", name: "Accessories" },
-  { id: "safety",      name: "Safety" },
-  { id: "kitchen",     name: "Kitchen" },
+  { id: "safety", name: "Safety" },
+  { id: "kitchen", name: "Kitchen" },
 ]
 
 function Stars({ rating }) {
   return (
     <div className="sh-stars">
-      {[1,2,3,4,5].map(s => (
+      {[1, 2, 3, 4, 5].map(s => (
         <span key={s} className={`sh-star ${s <= Math.round(rating) ? 'on' : 'off'}`}>★</span>
       ))}
     </div>
@@ -415,20 +415,19 @@ function Stars({ rating }) {
 
 export default function Product() {
   const [search, setSearch] = useState("")
-  const [cat, setCat]       = useState("all")
+  const [cat, setCat] = useState("all")
   const [gridKey, setGridKey] = useState(0)
 
   const filtered = products.filter(p => {
     const q = search.toLowerCase()
     return (cat === "all" || p.category === cat) &&
-           (p.name.toLowerCase().includes(q) || p.desc.toLowerCase().includes(q))
+      (p.name.toLowerCase().includes(q) || p.desc.toLowerCase().includes(q))
   })
 
   useEffect(() => { setGridKey(k => k + 1) }, [cat, search])
 
   return (
-    <div className="sh-root">
-      <style>{css}</style>
+    <div className="sh-root" id="products">      <style>{css}</style>
 
       <div className="sh-header">
         <div className="sh-title-area">
@@ -439,7 +438,7 @@ export default function Product() {
           </h1>
         </div>
         <span className="sh-count-pill">
-          {filtered.length.toString().padStart(2,'0')} items
+          {filtered.length.toString().padStart(2, '0')} items
         </span>
       </div>
 

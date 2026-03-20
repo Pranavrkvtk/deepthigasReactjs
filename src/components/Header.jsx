@@ -44,7 +44,7 @@ export default function Header() {
                     Services
                 </a>
 
-                <a href="#Product" onClick={() => setOpen(false)}>
+                <a href="#products" onClick={() => setOpen(false)}>
                     <svg className="nav-icon" viewBox="0 0 24 24" width="18" height="18">
                         <circle cx="9" cy="21" r="1"></circle>
                         <circle cx="20" cy="21" r="1"></circle>
