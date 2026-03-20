@@ -16,8 +16,8 @@ export default function Header() {
             </div>
 
             {/* HAMBURGER MENU BUTTON */}
-            <button 
-                className={`hamburger ${open ? "active" : ""}`} 
+            <button
+                className={`hamburger ${open ? "active" : ""}`}
                 onClick={() => setOpen(!open)}
                 aria-label="Menu"
             >
@@ -75,6 +75,18 @@ export default function Header() {
                     </svg>
                     Contact
                 </a>
+
+         <div className="auth-buttons">
+  <a href="/login" className="login-btn" onClick={() => setOpen(false)}>
+    Login
+  </a>
+
+</div>
+
+
+  <a href="/signup" className="signup-btn" onClick={() => setOpen(false)}>
+    Sign Up
+  </a>
 
                 {/* Mobile CTA */}
                 <a href="#contact" className="mobile-cta" onClick={() => setOpen(false)}>

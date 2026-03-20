@@ -222,6 +222,92 @@ const css = `
     padding: 4px 10px;
     border-radius: 4px;
   }
+    /* TOOLBAR WRAPPER */
+.sh-toolbar-modern {
+  max-width: 1200px;
+  margin: 30px auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* SEARCH BOX */
+.sh-search-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255,255,255,0.7);
+  backdrop-filter: blur(10px);
+  border-radius: 14px;
+  padding: 12px 16px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+  border: 1px solid rgba(255,255,255,0.4);
+  transition: 0.3s;
+}
+
+.sh-search-box:hover {
+  box-shadow: 0 12px 30px rgba(37,99,235,0.2);
+}
+
+.sh-search-box input {
+  border: none;
+  outline: none;
+  flex: 1;
+  font-size: 14px;
+  background: transparent;
+}
+
+.sh-search-icon {
+  width: 18px;
+  height: 18px;
+  stroke: #64748b;
+  fill: none;
+  stroke-width: 2;
+}
+
+/* CLEAR BUTTON */
+.sh-search-box button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  color: #64748b;
+}
+
+/* CATEGORY PILLS */
+.sh-categories-modern {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* PILLS */
+.sh-pill {
+  padding: 10px 18px;
+  border-radius: 999px;
+  border: none;
+  background: rgba(255,255,255,0.6);
+  backdrop-filter: blur(6px);
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  color: #334155;
+}
+
+/* HOVER */
+.sh-pill:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(37,99,235,0.15);
+}
+
+/* ACTIVE */
+.sh-pill.active {
+  background: linear-gradient(135deg,#2563eb,#7c3aed);
+  color: white;
+  box-shadow: 0 10px 25px rgba(37,99,235,0.3);
+}
 
   .sh-rating {
     display: flex;
@@ -382,31 +468,31 @@ const css = `
 `
 
 const products = [
-  { img: "p2.jpeg", name: "Butterfly Galaxy 3B Manual Glasstop Gas Stove", desc: "3 Burner Glass Top Gas Stove", price: "₹4,500", category: "stoves", rating: 4.5, badge: "Bestseller" },
-  { img: "p11.jpeg", name: "Butterfly Galaxy 2B Manual Glasstop Gas Stove", desc: "2 Burner Glass Top Gas Stove", price: "₹3,500", category: "stoves", rating: 4.3, badge: "Popular" },
-  { img: "p7.jpeg", name: "Butterfly 2B New Xtra Stainless Steel Stove", desc: "2 Burner Steel Gas Stove", price: "₹2,750", category: "stoves", rating: 4.4, badge: "Value" },
-  { img: "p10.jpeg", name: "HP Suraksha LPG Hose", desc: "1.5 Meter Safety Hose", price: "₹190", category: "accessories", rating: 4.8, badge: "Safety" },
-  { img: "p9.jpeg", name: "Suraksha Flame Lighter", desc: "With 100ML Refill Bottle", price: "₹250", category: "accessories", rating: 4.2, badge: "New" },
-  { img: "p8.jpeg", name: "Cylinder Trolley", desc: "Easy Movement Stand", price: "₹210", category: "accessories", rating: 4.1, badge: "Must Have" },
-  { img: "p3.jpeg", name: "Kitchen Apron", desc: "Protective Cooking Apron", price: "₹350", category: "kitchen", rating: 4.0, badge: "New" },
-  { img: "p5.jpeg", name: "HP 5KG Cylinder", desc: "Refill ₹537.50 | New ₹1412", price: "Updated Feb 2026", category: "cylinders", rating: 5.0, badge: "Popular" },
-  { img: "p6.jpeg", name: "Cook Top Stove 1 Burner", desc: "Compact Single Burner Stove", price: "₹1,099", category: "stoves", rating: 4.2, badge: "Compact" },
-  { img: "p4.jpeg", name: "HP Fire Extinguisher 500ML", desc: "Safety Fire Protection", price: "₹600", category: "safety", rating: 4.9, badge: "Essential" },
+  { img: "p2.jpeg",  name: "Butterfly Galaxy 3B Manual Glasstop Gas Stove", desc: "3 Burner Glass Top Gas Stove",  price: "₹4,500",  category: "stoves",      rating: 4.5, badge: "Bestseller" },
+  { img: "p11.jpeg", name: "Butterfly Galaxy 2B Manual Glasstop Gas Stove", desc: "2 Burner Glass Top Gas Stove",  price: "₹3,500",  category: "stoves",      rating: 4.3, badge: "Popular" },
+  { img: "p7.jpeg",  name: "Butterfly 2B New Xtra Stainless Steel Stove",   desc: "2 Burner Steel Gas Stove",     price: "₹2,750",  category: "stoves",      rating: 4.4, badge: "Value" },
+  { img: "p10.jpeg", name: "HP Suraksha LPG Hose",                          desc: "1.5 Meter Safety Hose",        price: "₹190",    category: "accessories", rating: 4.8, badge: "Safety" },
+  { img: "p9.jpeg",  name: "Suraksha Flame Lighter",                        desc: "With 100ML Refill Bottle",     price: "₹250",    category: "accessories", rating: 4.2, badge: "New" },
+  { img: "p8.jpeg",  name: "Cylinder Trolley",                              desc: "Easy Movement Stand",          price: "₹210",    category: "accessories", rating: 4.1, badge: "Must Have" },
+  { img: "p3.jpeg",  name: "Kitchen Apron",                                 desc: "Protective Cooking Apron",     price: "₹350",    category: "kitchen",     rating: 4.0, badge: "New" },
+  { img: "p5.jpeg",  name: "HP 5KG Cylinder",                               desc: "Refill ₹537.50 | New ₹1412",   price: "₹537", category: "cylinders", rating: 5.0, badge: "Popular" },
+  { img: "p6.jpeg",  name: "Cook Top Stove 1 Burner",                       desc: "Compact Single Burner Stove",  price: "₹1,099",  category: "stoves",      rating: 4.2, badge: "Compact" },
+  { img: "p4.jpeg",  name: "HP Fire Extinguisher 500ML",                    desc: "Safety Fire Protection",       price: "₹600",    category: "safety",      rating: 4.9, badge: "Essential" },
 ]
 
 const categories = [
-  { id: "all", name: "All" },
-  { id: "stoves", name: "Stoves" },
-  { id: "cylinders", name: "Cylinders" },
+  { id: "all",         name: "All" },
+  { id: "stoves",      name: "Stoves" },
+  { id: "cylinders",   name: "Cylinders" },
   { id: "accessories", name: "Accessories" },
-  { id: "safety", name: "Safety" },
-  { id: "kitchen", name: "Kitchen" },
+  { id: "safety",      name: "Safety" },
+  { id: "kitchen",     name: "Kitchen" },
 ]
 
 function Stars({ rating }) {
   return (
     <div className="sh-stars">
-      {[1, 2, 3, 4, 5].map(s => (
+      {[1,2,3,4,5].map(s => (
         <span key={s} className={`sh-star ${s <= Math.round(rating) ? 'on' : 'off'}`}>★</span>
       ))}
     </div>
@@ -415,61 +501,49 @@ function Stars({ rating }) {
 
 export default function Product() {
   const [search, setSearch] = useState("")
-  const [cat, setCat] = useState("all")
+  const [cat, setCat]       = useState("all")
   const [gridKey, setGridKey] = useState(0)
 
   const filtered = products.filter(p => {
     const q = search.toLowerCase()
     return (cat === "all" || p.category === cat) &&
-      (p.name.toLowerCase().includes(q) || p.desc.toLowerCase().includes(q))
+           (p.name.toLowerCase().includes(q) || p.desc.toLowerCase().includes(q))
   })
 
   useEffect(() => { setGridKey(k => k + 1) }, [cat, search])
 
   return (
-    <div className="sh-root" id="products">      <style>{css}</style>
+<div className="sh-root" id="products">      <style>{css}</style>
 
       <div className="sh-header">
         <div className="sh-title-area">
-          <p className="sh-eyebrow">Deepthi Gas Agencies</p>
           <h1 className="sh-title">
-            Our
+            
             <em>Products</em>
           </h1>
         </div>
         <span className="sh-count-pill">
-          {filtered.length.toString().padStart(2, '0')} items
+          {filtered.length.toString().padStart(2,'0')} items
         </span>
       </div>
 
-      <div className="sh-toolbar">
-        <div className="sh-search-wrap">
-          <span className="sh-search-icon">/ search</span>
-          <input
-            className="sh-search"
-            type="text"
-            placeholder="Name or description..."
-            value={search}
-            onChange={e => setSearch(e.target.value)}
-          />
-          {search && (
-            <button className="sh-clear-btn" onClick={() => setSearch("")}>✕</button>
-          )}
-        </div>
+   <div className="sh-toolbar-modern">
 
-        <div className="sh-cats">
-          {categories.map(c => (
-            <button
-              key={c.id}
-              className={`sh-cat ${cat === c.id ? 'active' : ''}`}
-              onClick={() => setCat(c.id)}
-            >
-              {c.name}
-            </button>
-          ))}
-        </div>
-      </div>
 
+  {/* CATEGORY */}
+  <div className="sh-categories-modern">
+    {categories.map(c => (
+      <button
+        key={c.id}
+        className={`sh-pill ${cat === c.id ? "active" : ""}`}
+        onClick={() => setCat(c.id)}
+      >
+        {c.name}
+      </button>
+    ))}
+  </div>
+
+</div>
       <div className="sh-grid-wrap">
         <div className="sh-grid" key={gridKey}>
           {filtered.length > 0 ? filtered.map((item, i) => (

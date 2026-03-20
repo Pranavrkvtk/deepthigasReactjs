@@ -1,383 +1,283 @@
 import React from "react";
 
 const styles = `
-  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,600&family=DM+Sans:wght@300;400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&display=swap');
 
-  .cs-wrap {
-    font-family: 'DM Sans', sans-serif;
-    padding: 4rem 2rem;
-    max-width: 1100px;
-    margin: 0 auto;
-  }
+.cs-wrap {
+  min-height: 100vh;
+  padding: 5rem 2rem;
+  font-family: 'DM Sans', sans-serif;
+  background: #F7F7F5;
+  position: relative;
+}
 
-  .cs-tag {
-    font-size: 11px;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: #3B6D11;
-    font-weight: 500;
-    margin-bottom: 0.5rem;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
+/* HEADER */
+.cs-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
 
-  .cs-tag::before {
-    content: '';
-    display: inline-block;
-    width: 24px;
-    height: 1.5px;
-    background: #3B6D11;
-  }
+.cs-title {
+  font-size: 36px;
+  font-weight: 800;
+  color: #1A1A1A;
+  margin-bottom: 6px;
+}
 
-  .cs-title {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(2rem, 4vw, 2.8rem);
-    font-weight: 600;
-    color: #1a1a1a;
-    margin: 0 0 2.5rem;
-    line-height: 1.2;
-  }
+.cs-title span { color: #3B6D11; }
 
-  .cs-title em {
-    color: #3B6D11;
-    font-style: italic;
-  }
+.cs-sub {
+  font-size: 14px;
+  color: #999;
+}
 
-  .cs-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
-  }
+/* GRID */
+.cs-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  max-width: 1000px;
+  margin: auto;
+}
 
-  @media (max-width: 680px) {
-    .cs-grid { grid-template-columns: 1fr; }
-  }
+/* CARD */
+.cs-card {
+  background: #fff;
+  border-radius: 16px;
+  border: 1px solid #E5E5E0;
+  padding: 36px 32px;
+}
 
-  .cs-form-card {
-    background: #fff;
-    border: 1px solid #e5e5e5;
-    border-radius: 16px;
-    padding: 2rem;
-    position: relative;
-    overflow: hidden;
-  }
+/* INPUT */
+.cs-field { margin-bottom: 14px; }
 
-  .cs-form-card::before {
-    content: '';
-    position: absolute;
-    top: -40px;
-    right: -40px;
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    background: #EAF3DE;
-    opacity: 0.6;
-    pointer-events: none;
-  }
+.cs-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: #888;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
 
-  .cs-form-label {
-    display: block;
-    font-size: 11px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: #666;
-    font-weight: 500;
-    margin-bottom: 6px;
-  }
+.cs-input {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid #E0E0DA;
+  font-size: 14px;
+  font-family: 'DM Sans', sans-serif;
+  color: #1A1A1A;
+  background: #FAFAF8;
+  outline: none;
+  transition: border-color .2s, box-shadow .2s;
+  box-sizing: border-box;
+}
 
-  .cs-field-wrap { margin-bottom: 1.25rem; }
+.cs-input:focus {
+  border-color: #3B6D11;
+  box-shadow: 0 0 0 3px rgba(59,109,17,0.08);
+  background: #fff;
+}
 
-  .cs-input {
-    width: 100%;
-    box-sizing: border-box;
-    padding: 10px 14px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 14px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    background: #fafafa;
-    color: #1a1a1a;
-    outline: none;
-    transition: border-color 0.2s;
-  }
+/* BUTTON */
+.cs-btn {
+  width: 100%;
+  padding: 14px;
+  border-radius: 10px;
+  border: none;
+  background: #3B6D11;
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: 'DM Sans', sans-serif;
+  cursor: pointer;
+  margin-top: 6px;
+  transition: background .2s, transform .15s;
+}
+.cs-btn:hover { background: #2D5510; }
+.cs-btn:active { transform: scale(0.98); }
 
-  .cs-input:focus {
-    border-color: #3B6D11;
-    background: #fff;
-  }
+/* TOAST */
+.cs-toast {
+  background: #EAF3DE;
+  color: #3B6D11;
+  padding: 12px 16px;
+  border-radius: 10px;
+  margin-bottom: 16px;
+  font-size: 14px;
+  font-weight: 500;
+  border: 1px solid rgba(59,109,17,0.15);
+}
 
-  .cs-textarea {
-    resize: vertical;
-    min-height: 100px;
-  }
+/* INFO ROWS */
+.cs-info-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 16px 0;
+  border-bottom: 1px solid #F0F0EC;
+}
+.cs-info-row:first-of-type { padding-top: 0; }
+.cs-info-row:last-of-type  { border-bottom: none; }
 
-  .cs-btn {
-    width: 100%;
-    padding: 13px;
-    background: #3B6D11;
-    color: #EAF3DE;
-    border: none;
-    border-radius: 8px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 14px;
-    font-weight: 500;
-    cursor: pointer;
-    letter-spacing: 0.04em;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    margin-top: 0.5rem;
-    transition: background 0.2s;
-  }
+.cs-info-icon {
+  width: 38px; height: 38px;
+  border-radius: 10px;
+  background: #EAF3DE;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 17px;
+  flex-shrink: 0;
+}
 
-  .cs-btn:hover { background: #27500A; }
+.cs-info-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: #BBB;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 3px;
+}
 
-  .cs-toast {
-    background: #EAF3DE;
-    color: #27500A;
-    border-radius: 8px;
-    padding: 10px 14px;
-    font-size: 13px;
-    margin-bottom: 1rem;
-    border-left: 3px solid #3B6D11;
-  }
+.cs-info-text {
+  font-size: 14px;
+  color: #1A1A1A;
+  font-weight: 500;
+}
 
-  .cs-info-card {
-    background: #1a2e12;
-    border-radius: 16px;
-    padding: 2rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1.25rem;
-  }
+/* WHATSAPP */
+.cs-wa-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 13px;
+  border-radius: 10px;
+  background: #25D366;
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+  margin-top: 20px;
+  transition: opacity .2s;
+}
+.cs-wa-btn:hover { opacity: 0.88; }
 
-  .cs-info-row {
-    display: flex;
-    gap: 14px;
-    align-items: flex-start;
-  }
-
-  .cs-icon-box {
-    width: 36px;
-    height: 36px;
-    border-radius: 8px;
-    background: rgba(255,255,255,0.08);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-  }
-
-  .cs-icon-box svg {
-    width: 16px;
-    height: 16px;
-    stroke: #97C459;
-    fill: none;
-    stroke-width: 1.8;
-  }
-
-  .cs-info-label {
-    font-size: 11px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: #639922;
-    font-weight: 500;
-    margin: 0 0 4px;
-  }
-
-  .cs-info-text {
-    font-size: 13px;
-    color: rgba(255,255,255,0.75);
-    margin: 0;
-    line-height: 1.7;
-  }
-
-  .cs-info-link {
-    color: rgba(255,255,255,0.85);
-    text-decoration: none;
-  }
-
-  .cs-info-link:hover { color: #97C459; }
-
-  .cs-divider {
-    height: 0.5px;
-    background: rgba(255,255,255,0.08);
-  }
-
-  .cs-wa-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    background: #25D366;
-    color: #fff;
-    text-decoration: none;
-    border-radius: 8px;
-    padding: 12px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 13px;
-    font-weight: 500;
-    margin-top: 0.25rem;
-    transition: background 0.2s;
-  }
-
-  .cs-wa-btn:hover { background: #1da851; }
-
-  .cs-wa-btn svg {
-    width: 18px;
-    height: 18px;
-    fill: #fff;
-  }
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .cs-grid { grid-template-columns: 1fr; }
+  .cs-card { padding: 28px 20px; }
+}
 `;
 
 export default function Contact({ form, submitted, onChange, onSubmit }) {
-    return (
-        <>
-            <style>{styles}</style>
+  return (
+    <section className="cs-wrap" id="contact">
+      <style>{styles}</style>
 
-            <section className="cs-wrap" id="contact">
-                <p className="cs-tag">Get in Touch</p>
-                <h2 className="cs-title">Contact Us <em>Today</em></h2>
+      <div className="cs-header">
+        <h2 className="cs-title">Contact <span>Us</span></h2>
+        <p className="cs-sub">We're here to help you anytime</p>
+      </div>
 
-                <div className="cs-grid">
+      <div className="cs-grid">
 
-                    {/* FORM */}
-                    <div className="cs-form-card">
-                        {submitted && (
-                            <div className="cs-toast">
-                                Message sent! We'll get back to you shortly.
-                            </div>
-                        )}
-                        <form onSubmit={onSubmit}>
-                            <div className="cs-field-wrap">
-                                <label className="cs-form-label">Your Name</label>
-                                <input
-                                    className="cs-input"
-                                    name="name"
-                                    value={form.name}
-                                    onChange={onChange}
-                                    required
-                                    placeholder="Enter your full name"
-                                />
-                            </div>
+        {/* FORM */}
+        <div className="cs-card">
+          {submitted && (
+            <div className="cs-toast">✓ Message sent successfully!</div>
+          )}
 
-                            <div className="cs-field-wrap">
-                                <label className="cs-form-label">Phone Number</label>
-                                <input
-                                    className="cs-input"
-                                    name="phone"
-                                    value={form.phone}
-                                    onChange={onChange}
-                                    required
-                                    placeholder="e.g. 9876543210"
-                                />
-                            </div>
+          <form onSubmit={onSubmit}>
+            <div className="cs-field">
+              <label className="cs-label">Your Name</label>
+              <input
+                className="cs-input"
+                name="name"
+                placeholder="Enter your name"
+                value={form.name}
+                onChange={onChange}
+                required
+              />
+            </div>
 
-                            <div className="cs-field-wrap">
-                                <label className="cs-form-label">Message</label>
-                                <textarea
-                                    className="cs-input cs-textarea"
-                                    name="message"
-                                    value={form.message}
-                                    onChange={onChange}
-                                    placeholder="How can we help you?"
-                                    rows={4}
-                                />
-                            </div>
+            <div className="cs-field">
+              <label className="cs-label">Phone Number</label>
+              <input
+                className="cs-input"
+                name="phone"
+                placeholder="Enter phone number"
+                value={form.phone}
+                onChange={onChange}
+                required
+              />
+            </div>
 
-                            <button type="submit" className="cs-btn">
-                                <svg viewBox="0 0 24 24" stroke="currentColor" fill="none" strokeWidth="2" width="16" height="16">
-                                    <line x1="22" y1="2" x2="11" y2="13" />
-                                    <polygon points="22 2 15 22 11 13 2 9 22 2" />
-                                </svg>
-                                Send Message
-                            </button>
-                        </form>
-                    </div>
+            <div className="cs-field">
+              <label className="cs-label">Message</label>
+              <textarea
+                className="cs-input"
+                name="message"
+                placeholder="How can we help you?"
+                value={form.message}
+                onChange={onChange}
+                rows={4}
+              />
+            </div>
 
-                    {/* INFO */}
-                    <div className="cs-info-card">
+            <button className="cs-btn" type="submit">Send Message</button>
+          </form>
+        </div>
 
-                        <div className="cs-info-row">
-                            <div className="cs-icon-box">
-                                <svg viewBox="0 0 24 24">
-                                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
-                                </svg>
-                            </div>
-                            <div>
-                                <p className="cs-info-label">Office Address</p>
-                                <p className="cs-info-text">JT Road, Vatakara – 673101<br />Kozhikode District, Kerala</p>
-                            </div>
-                        </div>
+        {/* INFO */}
+        <div className="cs-card">
 
-                        <div className="cs-divider" />
+          <div className="cs-info-row">
+            <div className="cs-info-icon">📍</div>
+            <div>
+              <p className="cs-info-label">Address</p>
+              <p className="cs-info-text">Vatakara, Kozhikode, Kerala</p>
+            </div>
+          </div>
 
-                        <div className="cs-info-row">
-                            <div className="cs-icon-box">
-                                <svg viewBox="0 0 24 24">
-                                    <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11.5 19.79 19.79 0 01.07 2.94 2 2 0 012.03 1h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z" />
-                                </svg>
-                            </div>
-                            <div>
-                                <p className="cs-info-label">Phone Numbers</p>
-                                <p className="cs-info-text">
-                                    <a className="cs-info-link" href="tel:+918078801349">+91 80788 01349</a><br />
-                                    <a className="cs-info-link" href="tel:+919196357144">+91 91963 57144</a>
-                                </p>
-                            </div>
-                        </div>
+          <div className="cs-info-row">
+            <div className="cs-info-icon">📞</div>
+            <div>
+              <p className="cs-info-label">Phone</p>
+              <p className="cs-info-text">+91 80788 01349</p>
+            </div>
+          </div>
 
-                        <div className="cs-divider" />
+          <div className="cs-info-row">
+            <div className="cs-info-icon">✉️</div>
+            <div>
+              <p className="cs-info-label">Email</p>
+              <p className="cs-info-text">deepthiecostore@gmail.com</p>
+            </div>
+          </div>
 
-                        <div className="cs-info-row">
-                            <div className="cs-icon-box">
-                                <svg viewBox="0 0 24 24">
-                                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
-                                    <polyline points="22,6 12,13 2,6" />
-                                </svg>
-                            </div>
-                            <div>
-                                <p className="cs-info-label">Email</p>
-                                <p className="cs-info-text">
-                                    <a className="cs-info-link" href="mailto:deepthiecostore@gmail.com">deepthiecostore@gmail.com</a>
-                                </p>
-                            </div>
-                        </div>
+          <div className="cs-info-row">
+            <div className="cs-info-icon">🕐</div>
+            <div>
+              <p className="cs-info-label">Hours</p>
+              <p className="cs-info-text">Mon – Sat: 9 AM – 5:30 PM</p>
+            </div>
+          </div>
 
-                        <div className="cs-divider" />
+          <a
+            href="https://wa.me/918078801349"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="cs-wa-btn"
+          >
+            💬 Chat on WhatsApp
+          </a>
 
-                        <div className="cs-info-row">
-                            <div className="cs-icon-box">
-                                <svg viewBox="0 0 24 24">
-                                    <circle cx="12" cy="12" r="10" />
-                                    <polyline points="12 6 12 12 16 14" />
-                                </svg>
-                            </div>
-                            <div>
-                                <p className="cs-info-label">Business Hours</p>
-                                <p className="cs-info-text">
-                                    Mon – Sat: 9:00 AM – 5:30 PM<br />
-                                    <span style={{ opacity: 0.5 }}>Sunday: Closed</span>
-                                </p>
-                            </div>
-                        </div>
-
-
-                        <a href="https://wa.me/918078801349"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="cs-wa-btn"
-                        >
-                            <svg viewBox="0 0 24 24">
-                                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
-                            </svg>
-                            Chat on WhatsApp
-                        </a>
-                    </div>
-                </div>
-            </section>
-        </>
-    );
+        </div>
+      </div>
+    </section>
+  );
 }

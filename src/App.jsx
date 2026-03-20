@@ -9,6 +9,9 @@ import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import Product from "./components/Product";
 import ChatBot from "./components/ChatBot";
+import Login from "./components/Login";
+import { Route, Routes } from "react-router-dom";
+import SignUp from "./components/SignUp";
 
 const styles = `
   @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,600&family=DM+Sans:wght@300;400;500&display=swap');
@@ -182,13 +185,19 @@ export default function App() {
 
       <div className="app-wrap">
         <Header />
+        <Routes>
+          {/* <Route path="/login" element={<Login />} /> */}
+
+          {/* <Route path="/signup" element={<SignUp />} /> */}
+          {/* <Route path="/signup" element={<Signup />} /> */}
+        </Routes>
 
         <main>
 
           {/* HERO */}
           <Hero />
           <Product />
-
+          {/* <Login /> */}
           {/* TRUST STRIP */}
           <div className="trust-strip">
             <div className="trust-strip-inner">
@@ -233,14 +242,14 @@ export default function App() {
         <a href="tel:+918078801349" className="floating-call">
           <span className="floating-call-icon">
             <svg viewBox="0 0 24 24">
-              <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11.5 19.79 19.79 0 01.07 2.94 2 2 0 012.03 1h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/>
+              <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11.5 19.79 19.79 0 01.07 2.94 2 2 0 012.03 1h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z" />
             </svg>
           </span>
           Call Now
         </a>
 
 
-`        <ChatBot />`
+        `        <ChatBot />`
         <Footer />
       </div>
     </>
