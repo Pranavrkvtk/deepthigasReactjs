@@ -10,7 +10,7 @@ export default function Header() {
             <div className="brand">
                 <div className="brand__logo">⛽</div>
                 <div className="brand__text">
-                    <h1>DeepthiGas</h1>
+                    <h1>Deepthi Gas</h1>
                     <p className="subtitle">Reliable LPG delivery</p>
                 </div>
             </div>
