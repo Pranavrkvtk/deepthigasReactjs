@@ -299,8 +299,18 @@
   .nav a {
     padding: 10px 14px;
   }
+}/* Small height devices */
+@media (max-height: 600px) and (max-width: 900px) {
+  .nav {
+    max-height: calc(100vh - 60px);
+  }
+  
+  .nav a {
+    padding: 10px 14px;
+  }
 }
 
+/* Login button style */
 .login-btn {
   display: inline-flex;
   align-items: center;
@@ -314,6 +324,45 @@
   text-decoration: none;
   font-weight: 500;
   border: 1px solid rgba(0,0,0,0.05);
-  transition: none;
+  transition: all 0.2s ease;
+  cursor: pointer;
 }
 
+.login-btn:hover {
+  background: rgba(59, 109, 17, 0.1);
+  border-color: rgba(59, 109, 17, 0.3);
+  color: #3B6D11;
+  transform: translateY(-1px);
+}
+
+/* SignUp button - Same style as Login */
+.signup-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255,255,255,0.8);
+  backdrop-filter: blur(6px);
+  color: #1e293b;
+  padding: 8px 16px;
+  border-radius: 10px;
+  font-size: 14px;
+  text-decoration: none;
+  font-weight: 500;
+  border: 1px solid rgba(0,0,0,0.05);
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.signup-btn:hover {
+  background: rgba(59, 109, 17, 0.1);
+  border-color: rgba(59, 109, 17, 0.3);
+  color: #3B6D11;
+  transform: translateY(-1px);
+}
+
+/* Auth buttons container */
+.auth-buttons {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}

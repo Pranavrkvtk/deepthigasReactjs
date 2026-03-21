@@ -10,7 +10,6 @@ import Footer from "./components/Footer";
 import Product from "./components/Product";
 import ChatBot from "./components/ChatBot";
 import Login from "./components/Login";
-import { Route, Routes } from "react-router-dom";
 import SignUp from "./components/SignUp";
 
 const styles = `
@@ -29,19 +28,73 @@ const styles = `
     overflow-x: hidden;
   }
 
-  /* ── TRUST STRIP ── */
+  /* MODAL STYLES - Shared for both Login and SignUp */
+  .auth-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .auth-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(4px);
+  }
+
+  .auth-modal-content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 420px;
+    margin: 20px;
+    animation: fadeUp 0.3s ease;
+  }
+
+  @keyframes fadeUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .auth-close {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background: white;
+    border: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 16px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    z-index: 3;
+    transition: all 0.2s;
+  }
+
+  .auth-close:hover {
+    transform: scale(1.05);
+    background: #f0f0f0;
+  }
+
+  /* TRUST STRIP */
   .trust-strip {
     background: #1a2e12;
     color: rgba(255,255,255,0.85);
     text-align: center;
     padding: 12px 1rem;
     font-size: 13px;
-    font-weight: 400;
-    letter-spacing: 0.04em;
     display: flex;
-    align-items: center;
     justify-content: center;
-    gap: 0;
     overflow: hidden;
   }
 
@@ -61,7 +114,6 @@ const styles = `
     display: inline-flex;
     align-items: center;
     gap: 7px;
-    flex-shrink: 0;
   }
 
   .trust-dot {
@@ -69,21 +121,8 @@ const styles = `
     height: 5px;
     border-radius: 50%;
     background: #97C459;
-    flex-shrink: 0;
   }
 
-  /* ── SECTION WRAPPERS ── */
-  .section-services {
-    background: #ffffff;
-    padding: 0;
-  }
-
-  .section-about {
-    background: #f9f7f4;
-    padding: 0;
-  }
-
-  /* ── FLOATING CALL BUTTON ── */
   .floating-call {
     position: fixed;
     bottom: 28px;
@@ -92,71 +131,31 @@ const styles = `
     background: #3B6D11;
     color: #fff;
     text-decoration: none;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 13px;
-    font-weight: 500;
     padding: 13px 22px;
     border-radius: 50px;
     display: flex;
     align-items: center;
     gap: 8px;
-    box-shadow: 0 4px 20px rgba(59,109,17,0.35);
-    transition: background 0.2s, transform 0.2s;
-    letter-spacing: 0.03em;
+    font-weight: 500;
+    transition: all 0.2s;
   }
 
   .floating-call:hover {
     background: #27500A;
     transform: translateY(-2px);
   }
-
-  .floating-call-icon {
-    width: 18px;
-    height: 18px;
-    background: rgba(255,255,255,0.2);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-  }
-
-  .floating-call-icon svg {
-    width: 10px;
-    height: 10px;
-    stroke: #fff;
-    fill: none;
-    stroke-width: 2.5;
-  }
-
-  /* ── SECTION DIVIDERS ── */
-  .section-divider {
-    width: 100%;
-    height: 1px;
-    background: linear-gradient(to right, transparent, #e0dbd4, transparent);
-  }
 `;
 
 export default function App() {
   const [form, setForm] = useState({ name: "", phone: "", message: "" });
   const [submitted, setSubmitted] = useState(false);
+  const [showLogin, setShowLogin] = useState(false);
+  const [showSignup, setShowSignup] = useState(false);
 
   const services = [
-    {
-      title: "Gas Cylinder Delivery",
-      description: "Fast LPG delivery to your home",
-      icon: "🔥",
-    },
-    {
-      title: "Gas Stove",
-      description: "High quality gas stoves",
-      icon: "🍳",
-    },
-    {
-      title: "Installation",
-      description: "Safe and professional setup",
-      icon: "🔧",
-    },
+    { title: "Gas Cylinder Delivery", description: "Fast LPG delivery", icon: "🔥" },
+    { title: "Gas Stove", description: "High quality stoves", icon: "🍳" },
+    { title: "Installation", description: "Safe setup", icon: "🔧" },
   ];
 
   const handleChange = (e) => {
@@ -168,6 +167,29 @@ export default function App() {
     e.preventDefault();
     setSubmitted(true);
     setForm({ name: "", phone: "", message: "" });
+    setTimeout(() => setSubmitted(false), 3000);
+  };
+
+  const handleLoginSuccess = (userData) => {
+    console.log("User logged in:", userData);
+    setShowLogin(false);
+    alert(`Welcome back ${userData.email}! 🎉`);
+  };
+
+  const handleSignupSuccess = (userData) => {
+    console.log("User signed up:", userData);
+    setShowSignup(false);
+    alert(`Welcome to DeepthiGas ${userData.name}! 🎉`);
+  };
+
+  const handleSwitchToSignup = () => {
+    setShowLogin(false);
+    setShowSignup(true);
+  };
+
+  const handleSwitchToLogin = () => {
+    setShowSignup(false);
+    setShowLogin(true);
   };
 
   const trustItems = [
@@ -184,21 +206,50 @@ export default function App() {
       <style>{styles}</style>
 
       <div className="app-wrap">
-        <Header />
-        <Routes>
-          {/* <Route path="/login" element={<Login />} /> */}
+        {/* Header with both click handlers */}
+        <Header 
+          onLoginClick={() => setShowLogin(true)}
+          onSignupClick={() => setShowSignup(true)}
+        />
 
-          {/* <Route path="/signup" element={<SignUp />} /> */}
-          {/* <Route path="/signup" element={<Signup />} /> */}
-        </Routes>
+        {/* LOGIN POPUP */}
+        {showLogin && (
+          <div className="auth-modal">
+            <div className="auth-overlay" onClick={() => setShowLogin(false)} />
+            <div className="auth-modal-content">
+              <button className="auth-close" onClick={() => setShowLogin(false)}>
+                ✕
+              </button>
+              <Login 
+                onSwitchToSignup={handleSwitchToSignup}
+                onLoginSuccess={handleLoginSuccess}
+                onClose={() => setShowLogin(false)}
+              />
+            </div>
+          </div>
+        )}
+
+        {/* SIGNUP POPUP */}
+        {showSignup && (
+          <div className="auth-modal">
+            <div className="auth-overlay" onClick={() => setShowSignup(false)} />
+            <div className="auth-modal-content">
+              <button className="auth-close" onClick={() => setShowSignup(false)}>
+                ✕
+              </button>
+              <SignUp 
+                onSwitchToLogin={handleSwitchToLogin}
+                onSignupSuccess={handleSignupSuccess}
+                onClose={() => setShowSignup(false)}
+              />
+            </div>
+          </div>
+        )}
 
         <main>
-
-          {/* HERO */}
           <Hero />
           <Product />
-          {/* <Login /> */}
-          {/* TRUST STRIP */}
+
           <div className="trust-strip">
             <div className="trust-strip-inner">
               {[...trustItems, ...trustItems].map((item, i) => (
@@ -210,46 +261,27 @@ export default function App() {
             </div>
           </div>
 
-          {/* SERVICES */}
-          <div className="section-services">
-            <Services services={services} />
-          </div>
-
-          <div className="section-divider" />
-
-          {/* SERVICE AREA */}
+          <Services services={services} />
           <ServiceArea />
+          <About />
 
-          <div className="section-divider" />
-
-          {/* ABOUT */}
-          <div className="section-about">
-            <About />
-          </div>
-
-          <div className="section-divider" />
-
-          {/* CONTACT */}
           <Contact
             form={form}
             submitted={submitted}
             onChange={handleChange}
             onSubmit={handleSubmit}
           />
-
         </main>
 
+        {/* FLOATING CALL */}
         <a href="tel:+918078801349" className="floating-call">
-          <span className="floating-call-icon">
-            <svg viewBox="0 0 24 24">
-              <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11.5 19.79 19.79 0 01.07 2.94 2 2 0 012.03 1h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z" />
-            </svg>
-          </span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6.09-6.09 19.79 19.79 0 0 1-3.07-8.63A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.574 2.81.7A2 2 0 0 1 22 16.92z" />
+          </svg>
           Call Now
         </a>
 
-
-        `        <ChatBot />`
+        <ChatBot />
         <Footer />
       </div>
     </>
