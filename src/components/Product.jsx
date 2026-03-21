@@ -87,7 +87,6 @@ const css = `
     background: var(--card);
     padding: 28px;
     position: relative;
-    cursor: pointer;
     transition: background .25s, box-shadow .25s;
     display: flex;
     flex-direction: column;
@@ -181,6 +180,7 @@ const css = `
     overflow: hidden;
     margin-bottom: 22px;
     position: relative;
+    pointer-events: none;
   }
 
   .sh-img-box img {
@@ -198,6 +198,7 @@ const css = `
     color: var(--ink);
     line-height: 1.35;
     margin: 0 0 6px;
+    pointer-events: none;
   }
 
   .sh-desc {
@@ -205,6 +206,7 @@ const css = `
     color: var(--muted);
     margin: 0 0 18px;
     line-height: 1.5;
+    pointer-events: none;
   }
 
   .sh-footer {
@@ -221,6 +223,7 @@ const css = `
     font-size: 16px;
     font-weight: 500;
     color: var(--green);
+    pointer-events: none;
   }
 
   .sh-add-btn {
@@ -238,12 +241,20 @@ const css = `
     display: flex;
     align-items: center;
     gap: 6px;
+    position: relative;
+    z-index: 10;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .sh-add-btn:active {
+    transform: scale(0.96);
   }
 
   .sh-stars {
     display: flex;
     gap: 2px;
     margin-bottom: 14px;
+    pointer-events: none;
   }
   .sh-star { font-size: 11px; }
   .sh-star.on  { color: #5A9E1A; }
@@ -473,6 +484,7 @@ const css = `
   }
   .sh-card { animation: cardIn .35s ease both; }
 
+  /* Mobile specific styles for better touch */
   @media (max-width: 768px) {
     .sh-header {
       padding: 24px 16px;
@@ -522,6 +534,7 @@ const css = `
       padding: 14px;
       border-radius: 16px;
       border: 1px solid var(--border);
+      cursor: default;
     }
 
     .sh-name {
@@ -538,8 +551,9 @@ const css = `
     }
 
     .sh-add-btn {
-      padding: 6px 12px;
-      font-size: 10px;
+      padding: 8px 14px;
+      font-size: 11px;
+      min-height: 36px;
     }
 
     .product-modal {
@@ -578,6 +592,12 @@ const css = `
 
     .modal-title {
       font-size: 15px;
+    }
+
+    .sh-add-btn {
+      padding: 6px 12px;
+      font-size: 10px;
+      min-height: 32px;
     }
   }
 `
@@ -629,7 +649,9 @@ export default function Product() {
 
   useEffect(() => { setGridKey(k => k + 1) }, [cat, search])
 
-  const handleAddToCart = (product) => {
+  const handleAddToCart = (e, product) => {
+    e.preventDefault()
+    e.stopPropagation()
     setSelectedProduct(product)
     setQty(1)
   }
@@ -713,7 +735,12 @@ export default function Product() {
                 <span className="sh-price">{formatPrice(item.price)}</span>
                 <button 
                   className="sh-add-btn"
-                  onClick={() => handleAddToCart(item)}
+                  onClick={(e) => handleAddToCart(e, item)}
+                  onTouchEnd={(e) => {
+                    e.preventDefault()
+                    e.stopPropagation()
+                    handleAddToCart(e, item)
+                  }}
                 >
                   <span>+</span> Add
                 </button>
