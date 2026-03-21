@@ -93,6 +93,7 @@ const css = `
     box-shadow: 0 1px 3px rgba(0,0,0,0.06);
     cursor: pointer;
     -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
   }
   .sh-card:active {
     background: #F0F7E6;
@@ -149,6 +150,7 @@ const css = `
     transition: all 0.3s ease;
     color: #334155;
     -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
   }
 
   .sh-pill:active {
@@ -257,6 +259,7 @@ const css = `
     z-index: 10;
     -webkit-tap-highlight-color: transparent;
     pointer-events: auto;
+    touch-action: manipulation;
   }
 
   .sh-add-btn:active {
@@ -432,6 +435,7 @@ const css = `
     font-size: 16px;
     font-weight: 600;
     transition: all 0.2s;
+    touch-action: manipulation;
   }
 
   .qty-btn:hover {
@@ -483,6 +487,7 @@ const css = `
     align-items: center;
     justify-content: center;
     gap: 8px;
+    touch-action: manipulation;
   }
 
   .modal-add-btn:hover {
@@ -653,7 +658,6 @@ export default function Product() {
   const [selectedProduct, setSelectedProduct] = useState(null)
   const [qty, setQty] = useState(1)
   const [gridKey, setGridKey] = useState(0)
-  const [touchTimeout, setTouchTimeout] = useState(null)
 
   const filtered = products.filter(p => {
     const q = search.toLowerCase()
@@ -675,33 +679,6 @@ export default function Product() {
     e.stopPropagation()
     setSelectedProduct(product)
     setQty(1)
-  }
-
-  // Handle touch start for mobile
-  const handleTouchStart = (e, product) => {
-    // Clear any existing timeout
-    if (touchTimeout) {
-      clearTimeout(touchTimeout)
-    }
-    // Set a timeout to detect long press vs tap
-    const timeout = setTimeout(() => {
-      // Long press - do nothing special
-    }, 500)
-    setTouchTimeout(timeout)
-  }
-
-  // Handle touch end for mobile
-  const handleTouchEnd = (e, product) => {
-    // Clear the timeout
-    if (touchTimeout) {
-      clearTimeout(touchTimeout)
-    }
-    // Check if the touch ended on the add button
-    if (e.target.closest('.sh-add-btn')) {
-      return
-    }
-    // Open modal on tap
-    handleProductClick(product)
   }
 
   const handleCloseModal = () => {
@@ -763,8 +740,6 @@ export default function Product() {
                 }
                 handleProductClick(item)
               }}
-              onTouchStart={(e) => handleTouchStart(e, item)}
-              onTouchEnd={(e) => handleTouchEnd(e, item)}
             >
               <div className="sh-card-top">
                 <span className="sh-badge">{item.badge}</span>
@@ -793,12 +768,6 @@ export default function Product() {
                 <button 
                   className="sh-add-btn"
                   onClick={(e) => handleAddToCart(e, item)}
-                  onTouchStart={(e) => e.stopPropagation()}
-                  onTouchEnd={(e) => {
-                    e.preventDefault()
-                    e.stopPropagation()
-                    handleAddToCart(e, item)
-                  }}
                 >
                   <span>+</span> Add
                 </button>
