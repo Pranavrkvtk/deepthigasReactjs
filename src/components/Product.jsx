@@ -91,13 +91,11 @@ const css = `
     display: flex;
     flex-direction: column;
     box-shadow: 0 1px 3px rgba(0,0,0,0.06);
-    cursor: pointer;
     -webkit-tap-highlight-color: transparent;
     touch-action: manipulation;
   }
   .sh-card:active {
     background: #F0F7E6;
-    transform: scale(0.99);
   }
   .sh-card:hover { background: #F0F7E6; box-shadow: 0 6px 20px rgba(90,158,26,0.1); }
 
@@ -106,7 +104,6 @@ const css = `
     align-items: flex-start;
     justify-content: space-between;
     margin-bottom: 20px;
-    pointer-events: none;
   }
 
   .sh-badge {
@@ -194,7 +191,6 @@ const css = `
     overflow: hidden;
     margin-bottom: 22px;
     position: relative;
-    pointer-events: none;
   }
 
   .sh-img-box img {
@@ -212,7 +208,6 @@ const css = `
     color: var(--ink);
     line-height: 1.35;
     margin: 0 0 6px;
-    pointer-events: none;
   }
 
   .sh-desc {
@@ -220,7 +215,6 @@ const css = `
     color: var(--muted);
     margin: 0 0 18px;
     line-height: 1.5;
-    pointer-events: none;
   }
 
   .sh-footer {
@@ -237,7 +231,6 @@ const css = `
     font-size: 16px;
     font-weight: 500;
     color: var(--green);
-    pointer-events: none;
   }
 
   .sh-add-btn {
@@ -258,7 +251,6 @@ const css = `
     position: relative;
     z-index: 10;
     -webkit-tap-highlight-color: transparent;
-    pointer-events: auto;
     touch-action: manipulation;
   }
 
@@ -270,7 +262,6 @@ const css = `
     display: flex;
     gap: 2px;
     margin-bottom: 14px;
-    pointer-events: none;
   }
   .sh-star { font-size: 11px; }
   .sh-star.on  { color: #5A9E1A; }
@@ -552,7 +543,6 @@ const css = `
       padding: 14px;
       border-radius: 16px;
       border: 1px solid var(--border);
-      cursor: pointer;
     }
 
     .sh-name {
@@ -675,7 +665,6 @@ export default function Product() {
 
   // Handle Add button click
   const handleAddToCart = (e, product) => {
-    e.preventDefault()
     e.stopPropagation()
     setSelectedProduct(product)
     setQty(1)
@@ -733,35 +722,35 @@ export default function Product() {
               className="sh-card"
               key={item.name}
               style={{ animationDelay: `${i * 40}ms` }}
-              onClick={(e) => {
-                // Check if click target is add button
-                if (e.target.closest('.sh-add-btn')) {
-                  return
-                }
-                handleProductClick(item)
-              }}
             >
-              <div className="sh-card-top">
-                <span className="sh-badge">{item.badge}</span>
-                <div className="sh-rating">
-                  <span className="dot" />
-                  {item.rating}
+              {/* Card click area - but not on the button */}
+              <div 
+                className="sh-card-clickable"
+                onClick={() => handleProductClick(item)}
+                style={{ cursor: 'pointer', flex: 1, display: 'flex', flexDirection: 'column' }}
+              >
+                <div className="sh-card-top">
+                  <span className="sh-badge">{item.badge}</span>
+                  <div className="sh-rating">
+                    <span className="dot" />
+                    {item.rating}
+                  </div>
                 </div>
+
+                <div className="sh-img-box">
+                  <img
+                    src={item.img}
+                    alt={item.name}
+                    onError={e => { e.target.src = 'https://via.placeholder.com/200?text=IMG' }}
+                  />
+                  <div className="sh-img-overlay" />
+                </div>
+
+                <Stars rating={item.rating} />
+
+                <h3 className="sh-name">{item.name}</h3>
+                <p className="sh-desc">{item.desc}</p>
               </div>
-
-              <div className="sh-img-box">
-                <img
-                  src={item.img}
-                  alt={item.name}
-                  onError={e => { e.target.src = 'https://via.placeholder.com/200?text=IMG' }}
-                />
-                <div className="sh-img-overlay" />
-              </div>
-
-              <Stars rating={item.rating} />
-
-              <h3 className="sh-name">{item.name}</h3>
-              <p className="sh-desc">{item.desc}</p>
 
               <div className="sh-footer">
                 <span className="sh-price">{formatPrice(item.price)}</span>
