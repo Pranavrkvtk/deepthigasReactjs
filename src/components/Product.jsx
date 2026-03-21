@@ -91,6 +91,12 @@ const css = `
     display: flex;
     flex-direction: column;
     box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .sh-card:active {
+    background: #F0F7E6;
+    transform: scale(0.99);
   }
   .sh-card:hover { background: #F0F7E6; box-shadow: 0 6px 20px rgba(90,158,26,0.1); }
 
@@ -99,6 +105,7 @@ const css = `
     align-items: flex-start;
     justify-content: space-between;
     margin-bottom: 20px;
+    pointer-events: none;
   }
 
   .sh-badge {
@@ -141,6 +148,11 @@ const css = `
     font-weight: 500;
     transition: all 0.3s ease;
     color: #334155;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .sh-pill:active {
+    transform: scale(0.96);
   }
 
   .sh-pill:hover {
@@ -244,6 +256,7 @@ const css = `
     position: relative;
     z-index: 10;
     -webkit-tap-highlight-color: transparent;
+    pointer-events: auto;
   }
 
   .sh-add-btn:active {
@@ -534,7 +547,7 @@ const css = `
       padding: 14px;
       border-radius: 16px;
       border: 1px solid var(--border);
-      cursor: default;
+      cursor: pointer;
     }
 
     .sh-name {
@@ -640,6 +653,7 @@ export default function Product() {
   const [selectedProduct, setSelectedProduct] = useState(null)
   const [qty, setQty] = useState(1)
   const [gridKey, setGridKey] = useState(0)
+  const [touchTimeout, setTouchTimeout] = useState(null)
 
   const filtered = products.filter(p => {
     const q = search.toLowerCase()
@@ -649,11 +663,45 @@ export default function Product() {
 
   useEffect(() => { setGridKey(k => k + 1) }, [cat, search])
 
+  // Handle clicking on the product card (opens modal)
+  const handleProductClick = (product) => {
+    setSelectedProduct(product)
+    setQty(1)
+  }
+
+  // Handle Add button click
   const handleAddToCart = (e, product) => {
     e.preventDefault()
     e.stopPropagation()
     setSelectedProduct(product)
     setQty(1)
+  }
+
+  // Handle touch start for mobile
+  const handleTouchStart = (e, product) => {
+    // Clear any existing timeout
+    if (touchTimeout) {
+      clearTimeout(touchTimeout)
+    }
+    // Set a timeout to detect long press vs tap
+    const timeout = setTimeout(() => {
+      // Long press - do nothing special
+    }, 500)
+    setTouchTimeout(timeout)
+  }
+
+  // Handle touch end for mobile
+  const handleTouchEnd = (e, product) => {
+    // Clear the timeout
+    if (touchTimeout) {
+      clearTimeout(touchTimeout)
+    }
+    // Check if the touch ended on the add button
+    if (e.target.closest('.sh-add-btn')) {
+      return
+    }
+    // Open modal on tap
+    handleProductClick(product)
   }
 
   const handleCloseModal = () => {
@@ -708,6 +756,15 @@ export default function Product() {
               className="sh-card"
               key={item.name}
               style={{ animationDelay: `${i * 40}ms` }}
+              onClick={(e) => {
+                // Check if click target is add button
+                if (e.target.closest('.sh-add-btn')) {
+                  return
+                }
+                handleProductClick(item)
+              }}
+              onTouchStart={(e) => handleTouchStart(e, item)}
+              onTouchEnd={(e) => handleTouchEnd(e, item)}
             >
               <div className="sh-card-top">
                 <span className="sh-badge">{item.badge}</span>
@@ -736,6 +793,7 @@ export default function Product() {
                 <button 
                   className="sh-add-btn"
                   onClick={(e) => handleAddToCart(e, item)}
+                  onTouchStart={(e) => e.stopPropagation()}
                   onTouchEnd={(e) => {
                     e.preventDefault()
                     e.stopPropagation()
@@ -804,7 +862,7 @@ export default function Product() {
               </div>
               
               <button className="modal-add-btn" onClick={handleConfirmAdd}>
-                <span>🛒</span> Add ({qty})
+                <span>🛒</span> Add to Cart ({qty})
               </button>
             </div>
           </div>
