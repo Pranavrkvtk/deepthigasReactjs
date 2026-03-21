@@ -19,7 +19,7 @@ const css = `
 
   .sh-root {
     min-height: 100vh;
-    background: var(--bg);
+    background: rgba(124, 58, 237, 0.12);
     color: var(--ink);
     font-family: 'DM Sans', sans-serif;
     padding: 0;

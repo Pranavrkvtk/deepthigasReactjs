@@ -368,15 +368,82 @@ const css = `
   .sv-lb-prev { left: 24px; }
   .sv-lb-next { right: 24px; }
 
-  /* ── RESPONSIVE ── */
+  /* ── RESPONSIVE UPDATED: 2 CARDS IN MOBILE GRID ── */
   @media (max-width: 900px) {
-    .sv-grid { grid-template-columns: repeat(2, 1fr); }
-    .sv-gcard { flex: 0 0 calc(50% - 6px); }
+    .sv-grid { 
+      grid-template-columns: repeat(2, 1fr); 
+    }
+    .sv-gcard { 
+      flex: 0 0 calc(50% - 6px); 
+    }
   }
+  
   @media (max-width: 600px) {
-    .sv-head { flex-direction: column; align-items: flex-start; }
-    .sv-grid { grid-template-columns: 1fr; }
-    .sv-gcard { flex: 0 0 calc(100% - 0px); margin-right: 12px; }
+    .sv-head { 
+      flex-direction: column; 
+      align-items: flex-start; 
+    }
+    .sv-subtitle { 
+      text-align: left; 
+    }
+    /* UPDATED: 2 columns on mobile (was 1 before) */
+    .sv-grid { 
+      grid-template-columns: repeat(2, 1fr); 
+      gap: 1px;
+    }
+    .sv-card {
+      padding: 1.5rem 1.25rem;
+    }
+    .sv-card-title {
+      font-size: 14px;
+    }
+    .sv-card-desc {
+      font-size: 12px;
+    }
+    .sv-icon-wrap {
+      width: 42px;
+      height: 42px;
+      font-size: 20px;
+      margin-bottom: 1rem;
+    }
+    .sv-card-num {
+      font-size: 10px;
+      margin-bottom: 0.9rem;
+    }
+    .sv-gcard { 
+      flex: 0 0 calc(50% - 6px); 
+      height: 180px;
+    }
+    .sv-gallery-head {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+    }
+  }
+
+  /* Extra small devices - maintain 2 columns */
+  @media (max-width: 480px) {
+    .sv-grid { 
+      grid-template-columns: repeat(2, 1fr); 
+    }
+    .sv-card {
+      padding: 1.2rem 1rem;
+    }
+    .sv-card-title {
+      font-size: 13px;
+    }
+    .sv-card-desc {
+      font-size: 11px;
+      line-height: 1.5;
+    }
+    .sv-icon-wrap {
+      width: 38px;
+      height: 38px;
+      font-size: 18px;
+    }
+    .sv-gcard {
+      height: 150px;
+    }
   }
 `;
 
@@ -442,7 +509,7 @@ export default function Services({ services }) {
           <p className="sv-subtitle">Everything you need for safe, reliable LPG service in Vatakara.</p>
         </div>
 
-        {/* SERVICE CARDS */}
+        {/* SERVICE CARDS - Now 2 columns on mobile */}
         <div className="sv-grid">
           {list.map((s, i) => (
             <div className="sv-card" key={i}>
