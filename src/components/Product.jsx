@@ -37,23 +37,6 @@ const css = `
     border-bottom: 1px solid var(--border);
   }
 
-  .sh-eyebrow {
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    color: var(--green);
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    margin-bottom: 14px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-  .sh-eyebrow::before {
-    content: '';
-    width: 28px; height: 1px;
-    background: var(--green);
-  }
-
   .sh-title {
     font-family: 'Syne', sans-serif;
     font-size: clamp(36px, 5vw, 72px);
@@ -80,98 +63,6 @@ const css = `
     white-space: nowrap;
     align-self: flex-end;
     margin-bottom: 6px;
-  }
-
-  /* ── TOOLBAR ── */
-  .sh-toolbar {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 28px 48px;
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    flex-wrap: wrap;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .sh-search-wrap {
-    flex: 1;
-    min-width: 200px;
-    position: relative;
-  }
-
-  .sh-search-icon {
-    position: absolute;
-    left: 16px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: var(--muted);
-    font-family: 'DM Mono', monospace;
-    font-size: 12px;
-    pointer-events: none;
-  }
-
-  .sh-search {
-    width: 100%;
-    background: #fff;
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 12px 40px 12px 44px;
-    color: var(--ink);
-    font-size: 14px;
-    font-family: 'DM Sans', sans-serif;
-    outline: none;
-    transition: border-color .2s;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.05);
-  }
-  .sh-search::placeholder { color: var(--muted); }
-  .sh-search:focus { border-color: var(--border-hover); }
-
-  .sh-clear-btn {
-    position: absolute;
-    right: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    background: none;
-    border: none;
-    color: var(--muted);
-    cursor: pointer;
-    font-size: 14px;
-    padding: 4px;
-    line-height: 1;
-  }
-  .sh-clear-btn:hover { color: var(--green); }
-
-  /* ── CATEGORY TABS ── */
-  .sh-cats {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-  }
-
-  .sh-cat {
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    padding: 9px 18px;
-    border-radius: 8px;
-    border: 1px solid var(--border);
-    background: transparent;
-    color: var(--muted);
-    cursor: pointer;
-    transition: all .2s;
-  }
-  .sh-cat:hover {
-    border-color: var(--border-hover);
-    color: var(--green);
-    background: var(--green-dim);
-  }
-  .sh-cat.active {
-    background: var(--green);
-    border-color: var(--green);
-    color: #fff;
-    font-weight: 500;
   }
 
   /* ── GRID ── */
@@ -233,49 +124,6 @@ const css = `
     gap: 20px;
   }
 
-  /* SEARCH BOX */
-  .sh-search-box {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    background: rgba(255,255,255,0.7);
-    backdrop-filter: blur(10px);
-    border-radius: 14px;
-    padding: 12px 16px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.05);
-    border: 1px solid rgba(255,255,255,0.4);
-    transition: 0.3s;
-  }
-
-  .sh-search-box:hover {
-    box-shadow: 0 12px 30px rgba(37,99,235,0.2);
-  }
-
-  .sh-search-box input {
-    border: none;
-    outline: none;
-    flex: 1;
-    font-size: 14px;
-    background: transparent;
-  }
-
-  .sh-search-icon {
-    width: 18px;
-    height: 18px;
-    stroke: #64748b;
-    fill: none;
-    stroke-width: 2;
-  }
-
-  /* CLEAR BUTTON */
-  .sh-search-box button {
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 14px;
-    color: #64748b;
-  }
-
   /* CATEGORY PILLS */
   .sh-categories-modern {
     display: flex;
@@ -283,7 +131,6 @@ const css = `
     flex-wrap: wrap;
   }
 
-  /* PILLS */
   .sh-pill {
     padding: 10px 18px;
     border-radius: 999px;
@@ -297,13 +144,11 @@ const css = `
     color: #334155;
   }
 
-  /* HOVER */
   .sh-pill:hover {
     transform: translateY(-2px);
     box-shadow: 0 8px 20px rgba(37,99,235,0.15);
   }
 
-  /* ACTIVE */
   .sh-pill.active {
     background: linear-gradient(135deg,#2563eb,#7c3aed);
     color: white;
@@ -345,16 +190,6 @@ const css = `
     transition: transform .4s cubic-bezier(.4,0,.2,1);
   }
   .sh-card:hover .sh-img-box img { transform: scale(1.08); }
-
-  .sh-img-overlay {
-    position: absolute;
-    inset: 0;
-    background: rgba(168,213,90,0.06);
-    opacity: 0;
-    transition: opacity .25s;
-    border-radius: 12px;
-  }
-  .sh-card:hover .sh-img-overlay { opacity: 1; }
 
   .sh-name {
     font-family: 'Syne', sans-serif;
@@ -404,8 +239,6 @@ const css = `
     align-items: center;
     gap: 6px;
   }
-  .sh-add-btn:hover { opacity: .85; }
-  .sh-add-btn:active { transform: scale(0.96); }
 
   .sh-stars {
     display: flex;
@@ -422,37 +255,217 @@ const css = `
     padding: 80px 20px;
     background: var(--card);
   }
-  .sh-empty-icon {
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 16px;
-    display: block;
+
+  /* COMPACT POPUP MODAL STYLES */
+  .product-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    animation: overlayFade 0.3s ease;
   }
-  .sh-empty h3 {
-    font-family: 'Syne', sans-serif;
-    font-size: 22px;
-    font-weight: 800;
-    color: var(--ink);
-    margin: 0 0 10px;
+
+  @keyframes overlayFade {
+    from { opacity: 0; }
+    to { opacity: 1; }
   }
-  .sh-empty p { color: var(--muted); font-size: 14px; margin: 0 0 24px; }
-  .sh-empty-btn {
-    background: transparent;
-    border: 1px solid var(--border-hover);
-    color: var(--green);
-    padding: 10px 28px;
-    border-radius: 8px;
+
+  .product-modal {
+    background: white;
+    border-radius: 24px;
+    max-width: 380px;
+    width: 90%;
+    animation: modalSlideUp 0.3s cubic-bezier(0.34, 1.2, 0.64, 1);
+    position: relative;
+    overflow: hidden;
+  }
+
+  @keyframes modalSlideUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px) scale(0.96);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: rgba(0, 0, 0, 0.05);
+    border: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    z-index: 10;
+  }
+
+  .modal-close:hover {
+    background: rgba(0, 0, 0, 0.1);
+    transform: scale(1.05);
+  }
+
+  .modal-img {
+    width: 100%;
+    aspect-ratio: 1/1;
+    background: var(--surface);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+
+  .modal-img img {
+    width: 70%;
+    height: 70%;
+    object-fit: contain;
+  }
+
+  .modal-content {
+    padding: 16px 20px 24px;
+  }
+
+  .modal-badge {
+    display: inline-block;
     font-family: 'DM Mono', monospace;
-    font-size: 12px;
+    font-size: 9px;
     letter-spacing: 1px;
     text-transform: uppercase;
-    cursor: pointer;
-    transition: background .2s;
+    color: var(--green);
+    background: var(--green-dim);
+    border: 1px solid var(--border);
+    padding: 3px 8px;
+    border-radius: 4px;
+    margin-bottom: 12px;
   }
-  .sh-empty-btn:hover { background: var(--green-dim); }
+
+  .modal-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--ink);
+    margin: 0 0 6px;
+    line-height: 1.3;
+  }
+
+  .modal-desc {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.4;
+    margin-bottom: 12px;
+  }
+
+  .modal-price {
+    font-family: 'DM Mono', monospace;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--green);
+    margin-bottom: 16px;
+  }
+
+  .quantity-selector {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+    padding: 10px 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .quantity-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  .quantity-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .qty-btn {
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    border: 1.5px solid var(--border);
+    background: white;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    transition: all 0.2s;
+  }
+
+  .qty-btn:hover {
+    border-color: var(--green);
+    color: var(--green);
+  }
+
+  .qty-value {
+    font-size: 16px;
+    font-weight: 600;
+    min-width: 35px;
+    text-align: center;
+  }
+
+  .modal-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 8px 0;
+  }
+
+  .total-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  .total-amount {
+    font-family: 'DM Mono', monospace;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--green);
+  }
+
+  .modal-add-btn {
+    width: 100%;
+    background: var(--green);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 12px;
+    font-family: 'Syne', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .modal-add-btn:hover {
+    background: #4a7e15;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(90,158,26,0.25);
+  }
 
   @keyframes cardIn {
     from { opacity: 0; transform: translateY(12px); }
@@ -460,15 +473,7 @@ const css = `
   }
   .sh-card { animation: cardIn .35s ease both; }
 
-  @media (max-width: 720px) {
-    .sh-header { padding: 40px 20px 32px; grid-template-columns: 1fr; }
-    .sh-toolbar { padding: 20px; }
-    .sh-grid-wrap { padding: 24px 20px 60px; }
-    .sh-title { font-size: 40px; }
-  }
-
   @media (max-width: 768px) {
-    /* HEADER */
     .sh-header {
       padding: 24px 16px;
       grid-template-columns: 1fr;
@@ -477,7 +482,6 @@ const css = `
 
     .sh-title {
       font-size: 32px;
-      line-height: 1.1;
     }
 
     .sh-count-pill {
@@ -486,21 +490,15 @@ const css = `
       padding: 4px 12px;
     }
 
-    /* TOOLBAR */
     .sh-toolbar-modern {
       padding: 12px 16px;
       margin: 10px auto;
     }
 
-    /* CATEGORY SCROLL */
     .sh-categories-modern {
       overflow-x: auto;
       flex-wrap: nowrap;
       padding-bottom: 6px;
-    }
-
-    .sh-categories-modern::-webkit-scrollbar {
-      display: none;
     }
 
     .sh-pill {
@@ -509,7 +507,6 @@ const css = `
       padding: 8px 14px;
     }
 
-    /* GRID - UPDATED: 2 COLUMNS ON MOBILE */
     .sh-grid-wrap {
       padding: 16px;
     }
@@ -521,7 +518,6 @@ const css = `
       background: transparent;
     }
 
-    /* CARD */
     .sh-card {
       padding: 14px;
       border-radius: 16px;
@@ -530,7 +526,6 @@ const css = `
 
     .sh-name {
       font-size: 13px;
-      line-height: 1.3;
     }
 
     .sh-desc {
@@ -547,50 +542,23 @@ const css = `
       font-size: 10px;
     }
 
-    .sh-badge {
-      font-size: 8px;
-      padding: 3px 8px;
+    .product-modal {
+      max-width: 340px;
     }
 
-    .sh-rating {
-      font-size: 9px;
+    .modal-title {
+      font-size: 16px;
     }
 
-    .sh-stars {
-      margin-bottom: 8px;
-    }
-    
-    .sh-star {
-      font-size: 9px;
+    .modal-price {
+      font-size: 18px;
     }
 
-    /* IMAGE */
-    .sh-img-box {
-      aspect-ratio: 1/1;
-      margin-bottom: 12px;
-    }
-    
-    .sh-img-box img {
-      width: 85%;
-      height: 85%;
-    }
-
-    .sh-card-top {
-      margin-bottom: 12px;
-    }
-
-    .sh-footer {
-      padding-top: 10px;
-    }
-
-    /* EMPTY STATE */
-    .sh-empty {
-      padding: 40px 10px;
-      grid-column: span 2;
+    .modal-content {
+      padding: 14px 16px 20px;
     }
   }
 
-  /* For very small devices (below 480px) - still 2 columns but tighter */
   @media (max-width: 480px) {
     .sh-grid {
       gap: 10px;
@@ -600,36 +568,31 @@ const css = `
       padding: 12px;
     }
     
-    .sh-name {
-      font-size: 12px;
+    .product-modal {
+      max-width: 320px;
     }
-    
-    .sh-desc {
-      font-size: 10px;
+
+    .modal-img {
+      padding: 20px;
     }
-    
-    .sh-price {
-      font-size: 12px;
-    }
-    
-    .sh-add-btn {
-      padding: 5px 10px;
-      font-size: 9px;
+
+    .modal-title {
+      font-size: 15px;
     }
   }
 `
 
 const products = [
-  { img: "p2.jpeg",  name: "Butterfly Galaxy 3B Manual Glasstop Gas Stove", desc: "3 Burner Glass Top Gas Stove",  price: "₹4,500",  category: "stoves",      rating: 4.5, badge: "Bestseller" },
-  { img: "p11.jpeg", name: "Butterfly Galaxy 2B Manual Glasstop Gas Stove", desc: "2 Burner Glass Top Gas Stove",  price: "₹3,500",  category: "stoves",      rating: 4.3, badge: "Popular" },
-  { img: "p7.jpeg",  name: "Butterfly 2B New Xtra Stainless Steel Stove",   desc: "2 Burner Steel Gas Stove",     price: "₹2,750",  category: "stoves",      rating: 4.4, badge: "Value" },
-  { img: "p10.jpeg", name: "HP Suraksha LPG Hose",                          desc: "1.5 Meter Safety Hose",        price: "₹190",    category: "accessories", rating: 4.8, badge: "Safety" },
-  { img: "p9.jpeg",  name: "Suraksha Flame Lighter",                        desc: "With 100ML Refill Bottle",     price: "₹250",    category: "accessories", rating: 4.2, badge: "New" },
-  { img: "p8.jpeg",  name: "Cylinder Trolley",                              desc: "Easy Movement Stand",          price: "₹210",    category: "accessories", rating: 4.1, badge: "Must Have" },
-  { img: "p3.jpeg",  name: "Kitchen Apron",                                 desc: "Protective Cooking Apron",     price: "₹350",    category: "kitchen",     rating: 4.0, badge: "New" },
-  { img: "p5.jpeg",  name: "HP 5KG Cylinder",                               desc: "Refill ₹537.50 | New ₹1412",   price: "₹537",    category: "cylinders", rating: 5.0, badge: "Popular" },
-  { img: "p6.jpeg",  name: "Cook Top Stove 1 Burner",                       desc: "Compact Single Burner Stove",  price: "₹1,099",  category: "stoves",      rating: 4.2, badge: "Compact" },
-  { img: "p4.jpeg",  name: "HP Fire Extinguisher 500ML",                    desc: "Safety Fire Protection",       price: "₹600",    category: "safety",      rating: 4.9, badge: "Essential" },
+  { img: "p2.jpeg",  name: "Butterfly Galaxy 3B Manual Glasstop Gas Stove", desc: "3 Burner Glass Top Gas Stove",  price: 4500,  category: "stoves",      rating: 4.5, badge: "Bestseller" },
+  { img: "p11.jpeg", name: "Butterfly Galaxy 2B Manual Glasstop Gas Stove", desc: "2 Burner Glass Top Gas Stove",  price: 3500,  category: "stoves",      rating: 4.3, badge: "Popular" },
+  { img: "p7.jpeg",  name: "Butterfly 2B New Xtra Stainless Steel Stove",   desc: "2 Burner Steel Gas Stove",     price: 2750,  category: "stoves",      rating: 4.4, badge: "Value" },
+  { img: "p10.jpeg", name: "HP Suraksha LPG Hose",                          desc: "1.5 Meter Safety Hose",        price: 190,    category: "accessories", rating: 4.8, badge: "Safety" },
+  { img: "p9.jpeg",  name: "Suraksha Flame Lighter",                        desc: "With 100ML Refill Bottle",     price: 250,    category: "accessories", rating: 4.2, badge: "New" },
+  { img: "p8.jpeg",  name: "Cylinder Trolley",                              desc: "Easy Movement Stand",          price: 210,    category: "accessories", rating: 4.1, badge: "Must Have" },
+  { img: "p3.jpeg",  name: "Kitchen Apron",                                 desc: "Protective Cooking Apron",     price: 350,    category: "kitchen",     rating: 4.0, badge: "New" },
+  { img: "p5.jpeg",  name: "HP 5KG Cylinder",                               desc: "Refill ₹537.50 | New ₹1412",   price: 537,    category: "cylinders", rating: 5.0, badge: "Popular" },
+  { img: "p6.jpeg",  name: "Cook Top Stove 1 Burner",                       desc: "Compact Single Burner Stove",  price: 1099,   category: "stoves",      rating: 4.2, badge: "Compact" },
+  { img: "p4.jpeg",  name: "HP Fire Extinguisher 500ML",                    desc: "Safety Fire Protection",       price: 600,    category: "safety",      rating: 4.9, badge: "Essential" },
 ]
 
 const categories = [
@@ -653,7 +616,9 @@ function Stars({ rating }) {
 
 export default function Product() {
   const [search, setSearch] = useState("")
-  const [cat, setCat]       = useState("all")
+  const [cat, setCat] = useState("all")
+  const [selectedProduct, setSelectedProduct] = useState(null)
+  const [qty, setQty] = useState(1)
   const [gridKey, setGridKey] = useState(0)
 
   const filtered = products.filter(p => {
@@ -663,6 +628,27 @@ export default function Product() {
   })
 
   useEffect(() => { setGridKey(k => k + 1) }, [cat, search])
+
+  const handleAddToCart = (product) => {
+    setSelectedProduct(product)
+    setQty(1)
+  }
+
+  const handleCloseModal = () => {
+    setSelectedProduct(null)
+  }
+
+  const handleConfirmAdd = () => {
+    if (selectedProduct) {
+      const total = selectedProduct.price * qty
+      alert(`Added ${qty} x ${selectedProduct.name} to cart!\nTotal: ₹${total.toLocaleString()}`)
+      setSelectedProduct(null)
+    }
+  }
+
+  const formatPrice = (price) => {
+    return `₹${price.toLocaleString()}`
+  }
 
   return (
     <div className="sh-root" id="products">
@@ -680,7 +666,6 @@ export default function Product() {
       </div>
 
       <div className="sh-toolbar-modern">
-        {/* CATEGORY */}
         <div className="sh-categories-modern">
           {categories.map(c => (
             <button
@@ -725,8 +710,11 @@ export default function Product() {
               <p className="sh-desc">{item.desc}</p>
 
               <div className="sh-footer">
-                <span className="sh-price">{item.price}</span>
-                <button className="sh-add-btn">
+                <span className="sh-price">{formatPrice(item.price)}</span>
+                <button 
+                  className="sh-add-btn"
+                  onClick={() => handleAddToCart(item)}
+                >
                   <span>+</span> Add
                 </button>
               </div>
@@ -743,6 +731,58 @@ export default function Product() {
           )}
         </div>
       </div>
+
+      {/* COMPACT PRODUCT POPUP MODAL */}
+      {selectedProduct && (
+        <div className="product-modal-overlay" onClick={handleCloseModal}>
+          <div className="product-modal" onClick={(e) => e.stopPropagation()}>
+            <button className="modal-close" onClick={handleCloseModal}>✕</button>
+            
+            <div className="modal-img">
+              <img
+                src={selectedProduct.img}
+                alt={selectedProduct.name}
+                onError={e => { e.target.src = 'https://via.placeholder.com/200?text=Product' }}
+              />
+            </div>
+            
+            <div className="modal-content">
+              <span className="modal-badge">{selectedProduct.badge}</span>
+              <h2 className="modal-title">{selectedProduct.name}</h2>
+              <p className="modal-desc">{selectedProduct.desc}</p>
+              <div className="modal-price">{formatPrice(selectedProduct.price)}</div>
+              
+              <div className="quantity-selector">
+                <span className="quantity-label">Quantity</span>
+                <div className="quantity-controls">
+                  <button 
+                    className="qty-btn"
+                    onClick={() => setQty(Math.max(1, qty - 1))}
+                  >
+                    -
+                  </button>
+                  <span className="qty-value">{qty}</span>
+                  <button 
+                    className="qty-btn"
+                    onClick={() => setQty(qty + 1)}
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
+              
+              <div className="modal-total">
+                <span className="total-label">Total</span>
+                <span className="total-amount">{formatPrice(selectedProduct.price * qty)}</span>
+              </div>
+              
+              <button className="modal-add-btn" onClick={handleConfirmAdd}>
+                <span>🛒</span> Add ({qty})
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
