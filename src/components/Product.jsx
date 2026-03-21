@@ -190,7 +190,7 @@ const css = `
     border-radius: 16px;
     overflow: hidden;
   }
-
+  
   /* ── PRODUCT CARD ── */
   .sh-card {
     background: var(--card);
@@ -222,92 +222,93 @@ const css = `
     padding: 4px 10px;
     border-radius: 4px;
   }
-    /* TOOLBAR WRAPPER */
-.sh-toolbar-modern {
-  max-width: 1200px;
-  margin: 30px auto;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
+  
+  /* TOOLBAR WRAPPER */
+  .sh-toolbar-modern {
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
 
-/* SEARCH BOX */
-.sh-search-box {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  background: rgba(255,255,255,0.7);
-  backdrop-filter: blur(10px);
-  border-radius: 14px;
-  padding: 12px 16px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.05);
-  border: 1px solid rgba(255,255,255,0.4);
-  transition: 0.3s;
-}
+  /* SEARCH BOX */
+  .sh-search-box {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255,255,255,0.7);
+    backdrop-filter: blur(10px);
+    border-radius: 14px;
+    padding: 12px 16px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+    border: 1px solid rgba(255,255,255,0.4);
+    transition: 0.3s;
+  }
 
-.sh-search-box:hover {
-  box-shadow: 0 12px 30px rgba(37,99,235,0.2);
-}
+  .sh-search-box:hover {
+    box-shadow: 0 12px 30px rgba(37,99,235,0.2);
+  }
 
-.sh-search-box input {
-  border: none;
-  outline: none;
-  flex: 1;
-  font-size: 14px;
-  background: transparent;
-}
+  .sh-search-box input {
+    border: none;
+    outline: none;
+    flex: 1;
+    font-size: 14px;
+    background: transparent;
+  }
 
-.sh-search-icon {
-  width: 18px;
-  height: 18px;
-  stroke: #64748b;
-  fill: none;
-  stroke-width: 2;
-}
+  .sh-search-icon {
+    width: 18px;
+    height: 18px;
+    stroke: #64748b;
+    fill: none;
+    stroke-width: 2;
+  }
 
-/* CLEAR BUTTON */
-.sh-search-box button {
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 14px;
-  color: #64748b;
-}
+  /* CLEAR BUTTON */
+  .sh-search-box button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    color: #64748b;
+  }
 
-/* CATEGORY PILLS */
-.sh-categories-modern {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-}
+  /* CATEGORY PILLS */
+  .sh-categories-modern {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
 
-/* PILLS */
-.sh-pill {
-  padding: 10px 18px;
-  border-radius: 999px;
-  border: none;
-  background: rgba(255,255,255,0.6);
-  backdrop-filter: blur(6px);
-  cursor: pointer;
-  font-size: 13px;
-  font-weight: 500;
-  transition: all 0.3s ease;
-  color: #334155;
-}
+  /* PILLS */
+  .sh-pill {
+    padding: 10px 18px;
+    border-radius: 999px;
+    border: none;
+    background: rgba(255,255,255,0.6);
+    backdrop-filter: blur(6px);
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    color: #334155;
+  }
 
-/* HOVER */
-.sh-pill:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(37,99,235,0.15);
-}
+  /* HOVER */
+  .sh-pill:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(37,99,235,0.15);
+  }
 
-/* ACTIVE */
-.sh-pill.active {
-  background: linear-gradient(135deg,#2563eb,#7c3aed);
-  color: white;
-  box-shadow: 0 10px 25px rgba(37,99,235,0.3);
-}
+  /* ACTIVE */
+  .sh-pill.active {
+    background: linear-gradient(135deg,#2563eb,#7c3aed);
+    color: white;
+    box-shadow: 0 10px 25px rgba(37,99,235,0.3);
+  }
 
   .sh-rating {
     display: flex;
@@ -465,6 +466,157 @@ const css = `
     .sh-grid-wrap { padding: 24px 20px 60px; }
     .sh-title { font-size: 40px; }
   }
+
+  @media (max-width: 768px) {
+    /* HEADER */
+    .sh-header {
+      padding: 24px 16px;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    .sh-title {
+      font-size: 32px;
+      line-height: 1.1;
+    }
+
+    .sh-count-pill {
+      align-self: flex-start;
+      font-size: 11px;
+      padding: 4px 12px;
+    }
+
+    /* TOOLBAR */
+    .sh-toolbar-modern {
+      padding: 12px 16px;
+      margin: 10px auto;
+    }
+
+    /* CATEGORY SCROLL */
+    .sh-categories-modern {
+      overflow-x: auto;
+      flex-wrap: nowrap;
+      padding-bottom: 6px;
+    }
+
+    .sh-categories-modern::-webkit-scrollbar {
+      display: none;
+    }
+
+    .sh-pill {
+      white-space: nowrap;
+      font-size: 12px;
+      padding: 8px 14px;
+    }
+
+    /* GRID - UPDATED: 2 COLUMNS ON MOBILE */
+    .sh-grid-wrap {
+      padding: 16px;
+    }
+
+    .sh-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      border: none;
+      background: transparent;
+    }
+
+    /* CARD */
+    .sh-card {
+      padding: 14px;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+    }
+
+    .sh-name {
+      font-size: 13px;
+      line-height: 1.3;
+    }
+
+    .sh-desc {
+      font-size: 11px;
+      margin-bottom: 12px;
+    }
+
+    .sh-price {
+      font-size: 13px;
+    }
+
+    .sh-add-btn {
+      padding: 6px 12px;
+      font-size: 10px;
+    }
+
+    .sh-badge {
+      font-size: 8px;
+      padding: 3px 8px;
+    }
+
+    .sh-rating {
+      font-size: 9px;
+    }
+
+    .sh-stars {
+      margin-bottom: 8px;
+    }
+    
+    .sh-star {
+      font-size: 9px;
+    }
+
+    /* IMAGE */
+    .sh-img-box {
+      aspect-ratio: 1/1;
+      margin-bottom: 12px;
+    }
+    
+    .sh-img-box img {
+      width: 85%;
+      height: 85%;
+    }
+
+    .sh-card-top {
+      margin-bottom: 12px;
+    }
+
+    .sh-footer {
+      padding-top: 10px;
+    }
+
+    /* EMPTY STATE */
+    .sh-empty {
+      padding: 40px 10px;
+      grid-column: span 2;
+    }
+  }
+
+  /* For very small devices (below 480px) - still 2 columns but tighter */
+  @media (max-width: 480px) {
+    .sh-grid {
+      gap: 10px;
+    }
+    
+    .sh-card {
+      padding: 12px;
+    }
+    
+    .sh-name {
+      font-size: 12px;
+    }
+    
+    .sh-desc {
+      font-size: 10px;
+    }
+    
+    .sh-price {
+      font-size: 12px;
+    }
+    
+    .sh-add-btn {
+      padding: 5px 10px;
+      font-size: 9px;
+    }
+  }
 `
 
 const products = [
@@ -475,7 +627,7 @@ const products = [
   { img: "p9.jpeg",  name: "Suraksha Flame Lighter",                        desc: "With 100ML Refill Bottle",     price: "₹250",    category: "accessories", rating: 4.2, badge: "New" },
   { img: "p8.jpeg",  name: "Cylinder Trolley",                              desc: "Easy Movement Stand",          price: "₹210",    category: "accessories", rating: 4.1, badge: "Must Have" },
   { img: "p3.jpeg",  name: "Kitchen Apron",                                 desc: "Protective Cooking Apron",     price: "₹350",    category: "kitchen",     rating: 4.0, badge: "New" },
-  { img: "p5.jpeg",  name: "HP 5KG Cylinder",                               desc: "Refill ₹537.50 | New ₹1412",   price: "₹537", category: "cylinders", rating: 5.0, badge: "Popular" },
+  { img: "p5.jpeg",  name: "HP 5KG Cylinder",                               desc: "Refill ₹537.50 | New ₹1412",   price: "₹537",    category: "cylinders", rating: 5.0, badge: "Popular" },
   { img: "p6.jpeg",  name: "Cook Top Stove 1 Burner",                       desc: "Compact Single Burner Stove",  price: "₹1,099",  category: "stoves",      rating: 4.2, badge: "Compact" },
   { img: "p4.jpeg",  name: "HP Fire Extinguisher 500ML",                    desc: "Safety Fire Protection",       price: "₹600",    category: "safety",      rating: 4.9, badge: "Essential" },
 ]
@@ -513,12 +665,12 @@ export default function Product() {
   useEffect(() => { setGridKey(k => k + 1) }, [cat, search])
 
   return (
-<div className="sh-root" id="products">      <style>{css}</style>
+    <div className="sh-root" id="products">
+      <style>{css}</style>
 
       <div className="sh-header">
         <div className="sh-title-area">
           <h1 className="sh-title">
-            
             <em>Products</em>
           </h1>
         </div>
@@ -527,23 +679,21 @@ export default function Product() {
         </span>
       </div>
 
-   <div className="sh-toolbar-modern">
-
-
-  {/* CATEGORY */}
-  <div className="sh-categories-modern">
-    {categories.map(c => (
-      <button
-        key={c.id}
-        className={`sh-pill ${cat === c.id ? "active" : ""}`}
-        onClick={() => setCat(c.id)}
-      >
-        {c.name}
-      </button>
-    ))}
-  </div>
-
-</div>
+      <div className="sh-toolbar-modern">
+        {/* CATEGORY */}
+        <div className="sh-categories-modern">
+          {categories.map(c => (
+            <button
+              key={c.id}
+              className={`sh-pill ${cat === c.id ? "active" : ""}`}
+              onClick={() => setCat(c.id)}
+            >
+              {c.name}
+            </button>
+          ))}
+        </div>
+      </div>
+      
       <div className="sh-grid-wrap">
         <div className="sh-grid" key={gridKey}>
           {filtered.length > 0 ? filtered.map((item, i) => (
