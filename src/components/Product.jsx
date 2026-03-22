@@ -17,16 +17,134 @@ const css = `
     --tag-bg: rgba(90,158,26,0.1);
   }
 
+  /* Animated Gradient Background */
   .sh-root {
     min-height: 100vh;
-    background: rgba(124, 58, 237, 0.12);
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    position: relative;
+    overflow-x: hidden;
     color: var(--ink);
     font-family: 'DM Sans', sans-serif;
     padding: 0;
   }
 
-  /* ── HEADER STRIP ── */
+  /* Animated particles background */
+  .sh-root::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+      radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.2) 0%, transparent 50%),
+      repeating-linear-gradient(45deg, rgba(255,255,255,0.05) 0px, rgba(255,255,255,0.05) 2px, transparent 2px, transparent 8px);
+    pointer-events: none;
+    animation: gradientShift 10s ease infinite;
+  }
+
+  /* Floating particles animation */
+  .sh-root::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+      radial-gradient(circle at 10% 20%, rgba(255,255,255,0.1) 1px, transparent 1px),
+      radial-gradient(circle at 90% 70%, rgba(255,255,255,0.1) 1px, transparent 1px);
+    background-size: 50px 50px;
+    pointer-events: none;
+    animation: floatParticles 20s linear infinite;
+  }
+
+  @keyframes gradientShift {
+    0%, 100% {
+      opacity: 0.8;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+
+  @keyframes floatParticles {
+    0% {
+      transform: translateY(0px);
+    }
+    100% {
+      transform: translateY(-100px);
+    }
+  }
+
+  /* Animated floating shapes */
+  .floating-shapes {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .shape {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    animation: float 20s infinite ease-in-out;
+  }
+
+  .shape-1 {
+    width: 300px;
+    height: 300px;
+    top: -150px;
+    right: -100px;
+    animation-duration: 25s;
+    background: radial-gradient(circle, rgba(255,255,255,0.2), rgba(255,255,255,0.05));
+  }
+
+  .shape-2 {
+    width: 200px;
+    height: 200px;
+    bottom: -100px;
+    left: -100px;
+    animation-duration: 30s;
+    background: radial-gradient(circle, rgba(255,255,255,0.15), rgba(255,255,255,0.05));
+  }
+
+  .shape-3 {
+    width: 150px;
+    height: 150px;
+    top: 50%;
+    left: 10%;
+    animation-duration: 18s;
+    background: radial-gradient(circle, rgba(255,255,255,0.2), rgba(255,255,255,0.08));
+  }
+
+  .shape-4 {
+    width: 250px;
+    height: 250px;
+    bottom: 20%;
+    right: -50px;
+    animation-duration: 22s;
+    background: radial-gradient(circle, rgba(255,255,255,0.12), rgba(255,255,255,0.05));
+  }
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px) rotate(0deg);
+    }
+    50% {
+      transform: translateY(-30px) rotate(5deg);
+    }
+  }
+
+  /* Glass morphism effect for header */
   .sh-header {
+    position: relative;
+    z-index: 2;
     padding: 64px 48px 48px;
     max-width: 1400px;
     margin: 0 auto;
@@ -34,39 +152,337 @@ const css = `
     grid-template-columns: 1fr auto;
     align-items: end;
     gap: 32px;
-    border-bottom: 1px solid var(--border);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 0 0 20px 20px;
+    animation: slideDown 0.6s ease-out;
+  }
+
+  @keyframes slideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   .sh-title {
     font-family: 'Syne', sans-serif;
     font-size: clamp(36px, 5vw, 72px);
     font-weight: 800;
-    color: var(--ink);
+    color: white;
     line-height: 0.95;
     margin: 0;
     letter-spacing: -2px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    animation: fadeInUp 0.8s ease-out;
   }
+
   .sh-title em {
     font-style: normal;
-    color: var(--green);
+    color: #FFE66D;
     display: block;
+    background: linear-gradient(135deg, #FFE66D, #FFB347);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 
   .sh-count-pill {
     font-family: 'DM Mono', monospace;
     font-size: 13px;
-    color: var(--green);
-    background: var(--green-dim);
-    border: 1px solid var(--border);
+    color: white;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
     padding: 6px 16px;
     border-radius: 100px;
     white-space: nowrap;
     align-self: flex-end;
     margin-bottom: 6px;
+    animation: fadeInRight 0.8s ease-out;
   }
 
-  /* ── GRID ── */
+  /* Floating Toolbar Design - New Style */
+  .sh-toolbar-floating {
+    position: relative;
+    z-index: 2;
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 0;
+    animation: fadeInUp 0.8s ease-out 0.2s both;
+  }
+
+  /* Minimal Search Bar */
+  .sh-search-minimal {
+    margin-bottom: 32px;
+  }
+
+  .sh-search-field {
+    position: relative;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+
+  .sh-search-icon-mini {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 18px;
+    height: 18px;
+    color: #94a3b8;
+    pointer-events: none;
+    transition: color 0.3s;
+  }
+
+  .sh-search-input-mini {
+    width: 100%;
+    padding: 14px 20px 14px 52px;
+    font-size: 15px;
+    font-family: 'Inter', sans-serif;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50px;
+    outline: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    color: #0f172a;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  }
+
+  .sh-search-input-mini:focus {
+    border-color: #5A9E1A;
+    background: white;
+    box-shadow: 0 8px 25px rgba(90, 158, 26, 0.15);
+    transform: translateY(-2px);
+  }
+
+  .sh-search-input-mini:focus + .sh-search-icon-mini {
+    color: #5A9E1A;
+  }
+
+  .sh-search-clear-mini {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.05);
+    border: none;
+    cursor: pointer;
+    color: #94a3b8;
+    font-size: 12px;
+    padding: 0;
+    width: 22px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.2s;
+  }
+
+  .sh-search-clear-mini:hover {
+    background: #ef4444;
+    color: white;
+    transform: translateY(-50%) scale(1.05);
+  }
+
+  /* Category Grid Cards */
+  .sh-category-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px;
+    margin-bottom: 32px;
+  }
+
+  .sh-category-card {
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 16px;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .sh-category-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, #5A9E1A, #3a6e0a);
+    opacity: 0;
+    transition: opacity 0.3s;
+    z-index: 0;
+  }
+
+  .sh-category-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  }
+
+  .sh-category-card:hover::before {
+    opacity: 0.05;
+  }
+
+  .sh-category-card.active {
+    background: linear-gradient(135deg, #5A9E1A, #3a6e0a);
+    border-color: transparent;
+    box-shadow: 0 8px 20px rgba(90, 158, 26, 0.3);
+  }
+
+  .sh-category-card.active .sh-category-icon,
+  .sh-category-card.active .sh-category-name,
+  .sh-category-card.active .sh-category-count {
+    color: white;
+  }
+
+  .sh-category-icon {
+    font-size: 24px;
+    position: relative;
+    z-index: 1;
+    transition: transform 0.3s;
+  }
+
+  .sh-category-card:hover .sh-category-icon {
+    transform: scale(1.1);
+  }
+
+  .sh-category-info {
+    flex: 1;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    position: relative;
+    z-index: 1;
+  }
+
+  .sh-category-name {
+    font-size: 14px;
+    font-weight: 600;
+    font-family: 'Inter', sans-serif;
+    color: #334155;
+    transition: color 0.3s;
+  }
+
+  .sh-category-count {
+    font-size: 12px;
+    font-weight: 500;
+    font-family: 'DM Mono', monospace;
+    color: #94a3b8;
+    background: rgba(0, 0, 0, 0.05);
+    padding: 2px 8px;
+    border-radius: 20px;
+    transition: all 0.3s;
+  }
+
+  .sh-category-card.active .sh-category-count {
+    background: rgba(255, 255, 255, 0.25);
+  }
+
+  /* Filter Chips */
+  .sh-filter-chips {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 12px 20px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+
+  .sh-chips-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-right: 12px;
+  }
+
+  .sh-chips-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+  }
+
+  .sh-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: white;
+    border: 1px solid #e2e8f0;
+    padding: 6px 12px 6px 16px;
+    border-radius: 30px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #0f172a;
+    transition: all 0.2s;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  }
+
+  .sh-chip-icon {
+    font-size: 12px;
+  }
+
+  .sh-chip-remove {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #94a3b8;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 0;
+    margin-left: 4px;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+  }
+
+  .sh-chip-remove:hover {
+    color: #ef4444;
+    transform: scale(1.1);
+  }
+
+  .sh-chip-clear {
+    background: none;
+    border: none;
+    color: #5A9E1A;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 6px 12px;
+    border-radius: 30px;
+    transition: all 0.2s;
+    font-family: 'Inter', sans-serif;
+    margin-left: 4px;
+  }
+
+  .sh-chip-clear:hover {
+    background: #f1f5f9;
+    color: #3a6e0a;
+  }
+
+  /* Enhanced product cards */
   .sh-grid-wrap {
+    position: relative;
+    z-index: 2;
     max-width: 1400px;
     margin: 0 auto;
     padding: 40px 48px 80px;
@@ -75,96 +491,171 @@ const css = `
   .sh-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
-    gap: 1px;
-    background: var(--border);
-    border: 1px solid var(--border);
+    gap: 24px;
     border-radius: 16px;
-    overflow: hidden;
   }
   
-  /* ── PRODUCT CARD ── */
   .sh-card {
-    background: var(--card);
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
     padding: 28px;
     position: relative;
-    transition: background .25s, box-shadow .25s;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     display: flex;
     flex-direction: column;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
     -webkit-tap-highlight-color: transparent;
     touch-action: manipulation;
-  }
-  .sh-card:active {
-    background: #F0F7E6;
-  }
-  .sh-card:hover { background: #F0F7E6; box-shadow: 0 6px 20px rgba(90,158,26,0.1); }
-
-  .sh-card-top {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    margin-bottom: 20px;
+    animation: cardIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) both;
   }
 
-  .sh-badge {
-    font-family: 'DM Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    color: var(--green);
-    background: var(--green-dim);
-    border: 1px solid var(--border);
-    padding: 4px 10px;
-    border-radius: 4px;
-  }
-  
-  /* TOOLBAR WRAPPER */
-  .sh-toolbar-modern {
-    max-width: 1200px;
-    margin: 30px auto;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+  .sh-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    background: white;
   }
 
-  /* CATEGORY PILLS */
-  .sh-categories-modern {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
+  @keyframes cardIn {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
-  .sh-pill {
-    padding: 10px 18px;
-    border-radius: 999px;
+  /* Enhanced add button */
+  .sh-add-btn {
+    background: linear-gradient(135deg, #5A9E1A, #3a6e0a);
+    color: #fff;
     border: none;
-    background: rgba(255,255,255,0.6);
-    backdrop-filter: blur(6px);
+    border-radius: 12px;
+    padding: 9px 18px;
+    font-family: 'Syne', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .5px;
     cursor: pointer;
-    font-size: 13px;
-    font-weight: 500;
-    transition: all 0.3s ease;
-    color: #334155;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    position: relative;
+    z-index: 10;
     -webkit-tap-highlight-color: transparent;
     touch-action: manipulation;
+    overflow: hidden;
   }
 
-  .sh-pill:active {
-    transform: scale(0.96);
+  .sh-add-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
   }
 
-  .sh-pill:hover {
+  .sh-add-btn:active::before {
+    width: 300px;
+    height: 300px;
+  }
+
+  .sh-add-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(37,99,235,0.15);
+    box-shadow: 0 6px 20px rgba(90,158,26,0.4);
   }
 
-  .sh-pill.active {
-    background: linear-gradient(135deg,#2563eb,#7c3aed);
+  /* Enhanced modal with glass morphism */
+  .product-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    animation: overlayFade 0.3s ease;
+  }
+
+  .product-modal {
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(20px);
+    border-radius: 24px;
+    max-width: 260px;
+    width: 80%;
+    animation: modalSlideUp 0.4s cubic-bezier(0.34, 1.2, 0.64, 1);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+
+  @keyframes modalSlideUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px) scale(0.9);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  .modal-add-btn {
+    width: 100%;
+    background: linear-gradient(135deg, #5A9E1A, #3a6e0a);
     color: white;
-    box-shadow: 0 10px 25px rgba(37,99,235,0.3);
+    border: none;
+    border-radius: 12px;
+    padding: 10px;
+    font-family: 'Syne', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    touch-action: manipulation;
+    position: relative;
+    overflow: hidden;
   }
 
+  .modal-add-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+  }
+
+  .modal-add-btn:active::before {
+    width: 300px;
+    height: 300px;
+  }
+
+  .modal-add-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(90,158,26,0.4);
+  }
+
+  /* Rest of your existing styles remain the same... */
   .sh-rating {
     display: flex;
     align-items: center;
@@ -233,31 +724,6 @@ const css = `
     color: var(--green);
   }
 
-  .sh-add-btn {
-    background: var(--green);
-    color: #fff;
-    border: none;
-    border-radius: 8px;
-    padding: 9px 18px;
-    font-family: 'Syne', sans-serif;
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: .5px;
-    cursor: pointer;
-    transition: opacity .2s, transform .15s;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    position: relative;
-    z-index: 10;
-    -webkit-tap-highlight-color: transparent;
-    touch-action: manipulation;
-  }
-
-  .sh-add-btn:active {
-    transform: scale(0.96);
-  }
-
   .sh-stars {
     display: flex;
     gap: 2px;
@@ -271,60 +737,39 @@ const css = `
     grid-column: 1 / -1;
     text-align: center;
     padding: 80px 20px;
-    background: var(--card);
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
   }
 
-  /* EXTRA SMALL POPUP MODAL */
-  .product-modal-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(4px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
-    animation: overlayFade 0.2s ease;
+  .sh-empty-btn {
+    margin-top: 20px;
+    padding: 10px 24px;
+    background: linear-gradient(135deg, #5A9E1A, #3a6e0a);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s;
   }
 
-  @keyframes overlayFade {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
-
-  .product-modal {
-    background: white;
-    border-radius: 16px;
-    max-width: 260px;
-    width: 80%;
-    animation: modalSlideUp 0.25s cubic-bezier(0.34, 1.2, 0.64, 1);
-    position: relative;
-    overflow: hidden;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-  }
-
-  @keyframes modalSlideUp {
-    from {
-      opacity: 0;
-      transform: translateY(15px) scale(0.96);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0) scale(1);
-    }
+  .sh-empty-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(90,158,26,0.4);
   }
 
   .modal-close {
     position: absolute;
-    top: 6px;
-    right: 6px;
-    background: rgba(0, 0, 0, 0.05);
+    top: 8px;
+    right: 8px;
+    background: rgba(0, 0, 0, 0.1);
     border: none;
-    width: 22px;
-    height: 22px;
+    width: 26px;
+    height: 26px;
     border-radius: 50%;
     cursor: pointer;
-    font-size: 12px;
+    font-size: 14px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -333,8 +778,8 @@ const css = `
   }
 
   .modal-close:hover {
-    background: rgba(0, 0, 0, 0.1);
-    transform: scale(1.05);
+    background: rgba(0, 0, 0, 0.2);
+    transform: scale(1.1) rotate(90deg);
   }
 
   .modal-img {
@@ -344,69 +789,69 @@ const css = `
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 16px;
+    padding: 20px;
   }
 
   .modal-img img {
-    width: 60%;
-    height: 60%;
+    width: 65%;
+    height: 65%;
     object-fit: contain;
   }
 
   .modal-content {
-    padding: 8px 12px 14px;
+    padding: 12px 16px 18px;
   }
 
   .modal-badge {
     display: inline-block;
     font-family: 'DM Mono', monospace;
-    font-size: 7px;
+    font-size: 8px;
     letter-spacing: 1px;
     text-transform: uppercase;
     color: var(--green);
     background: var(--green-dim);
     border: 1px solid var(--border);
-    padding: 2px 5px;
-    border-radius: 3px;
-    margin-bottom: 6px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    margin-bottom: 8px;
   }
 
   .modal-title {
     font-family: 'Syne', sans-serif;
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 700;
     color: var(--ink);
-    margin: 0 0 3px;
+    margin: 0 0 4px;
     line-height: 1.3;
   }
 
   .modal-desc {
-    font-size: 10px;
+    font-size: 11px;
     color: var(--muted);
     line-height: 1.3;
-    margin-bottom: 6px;
+    margin-bottom: 8px;
   }
 
   .modal-price {
     font-family: 'DM Mono', monospace;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 600;
     color: var(--green);
-    margin-bottom: 8px;
+    margin-bottom: 12px;
   }
 
   .quantity-selector {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 8px;
-    padding: 6px 0;
+    margin-bottom: 12px;
+    padding: 8px 0;
     border-top: 1px solid var(--border);
     border-bottom: 1px solid var(--border);
   }
 
   .quantity-label {
-    font-size: 10px;
+    font-size: 12px;
     font-weight: 600;
     color: var(--ink);
   }
@@ -414,34 +859,32 @@ const css = `
   .quantity-controls {
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 8px;
   }
 
   .qty-btn {
-    width: 22px;
-    height: 22px;
-    border-radius: 5px;
+    width: 26px;
+    height: 26px;
+    border-radius: 6px;
     border: 1.5px solid var(--border);
     background: white;
     cursor: pointer;
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 600;
     transition: all 0.2s;
     touch-action: manipulation;
-    display: flex;
-    align-items: center;
-    justify-content: center;
   }
 
   .qty-btn:hover {
     border-color: var(--green);
     color: var(--green);
+    transform: scale(1.05);
   }
 
   .qty-value {
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 600;
-    min-width: 25px;
+    min-width: 30px;
     text-align: center;
   }
 
@@ -449,55 +892,46 @@ const css = `
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 10px;
-    padding: 4px 0;
+    margin-bottom: 14px;
+    padding: 6px 0;
   }
 
   .total-label {
-    font-size: 10px;
+    font-size: 12px;
     font-weight: 600;
     color: var(--ink);
   }
 
   .total-amount {
     font-family: 'DM Mono', monospace;
-    font-size: 13px;
+    font-size: 16px;
     font-weight: 700;
     color: var(--green);
   }
 
-  .modal-add-btn {
-    width: 100%;
-    background: var(--green);
-    color: white;
-    border: none;
-    border-radius: 8px;
-    padding: 8px;
-    font-family: 'Syne', sans-serif;
-    font-size: 11px;
-    font-weight: 700;
-    cursor: pointer;
-    transition: all 0.2s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
-    touch-action: manipulation;
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
-  .modal-add-btn:hover {
-    background: #4a7e15;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 8px rgba(90,158,26,0.2);
+  @keyframes fadeInRight {
+    from {
+      opacity: 0;
+      transform: translateX(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
   }
 
-  @keyframes cardIn {
-    from { opacity: 0; transform: translateY(12px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-  .sh-card { animation: cardIn .35s ease both; }
-
-  /* Mobile specific styles */
+  /* Mobile responsive styles */
   @media (max-width: 768px) {
     .sh-header {
       padding: 24px 16px;
@@ -515,21 +949,58 @@ const css = `
       padding: 4px 12px;
     }
 
-    .sh-toolbar-modern {
-      padding: 12px 16px;
-      margin: 10px auto;
+    .sh-toolbar-floating {
+      margin: 20px auto;
+      padding: 0 12px;
     }
 
-    .sh-categories-modern {
-      overflow-x: auto;
-      flex-wrap: nowrap;
-      padding-bottom: 6px;
+    .sh-search-field {
+      max-width: 100%;
     }
 
-    .sh-pill {
-      white-space: nowrap;
+    .sh-search-input-mini {
+      padding: 12px 16px 12px 48px;
+      font-size: 14px;
+    }
+
+    .sh-category-grid {
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 10px;
+    }
+
+    .sh-category-card {
+      padding: 10px 12px;
+    }
+
+    .sh-category-icon {
+      font-size: 20px;
+    }
+
+    .sh-category-name {
       font-size: 12px;
-      padding: 8px 14px;
+    }
+
+    .sh-category-count {
+      font-size: 10px;
+      padding: 1px 6px;
+    }
+
+    .sh-filter-chips {
+      padding: 10px 16px;
+    }
+
+    .sh-chips-label {
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .sh-chips-list {
+      flex-wrap: wrap;
+    }
+
+    .sh-chip {
+      font-size: 12px;
+      padding: 4px 10px 4px 12px;
     }
 
     .sh-grid-wrap {
@@ -539,30 +1010,41 @@ const css = `
     .sh-grid {
       grid-template-columns: repeat(2, 1fr);
       gap: 12px;
-      border: none;
-      background: transparent;
     }
 
     .sh-card {
       padding: 14px;
       border-radius: 16px;
-      border: 1px solid var(--border);
     }
 
     .product-modal {
       max-width: 240px;
     }
-
-    .modal-title {
-      font-size: 11px;
-    }
-
-    .modal-price {
-      font-size: 13px;
-    }
   }
 
   @media (max-width: 480px) {
+    .sh-category-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+    }
+
+    .sh-category-card {
+      padding: 8px 10px;
+    }
+
+    .sh-category-icon {
+      font-size: 18px;
+    }
+
+    .sh-category-name {
+      font-size: 11px;
+    }
+
+    .sh-search-input-mini {
+      padding: 10px 12px 10px 44px;
+      font-size: 13px;
+    }
+
     .sh-grid {
       gap: 10px;
     }
@@ -573,22 +1055,6 @@ const css = `
     
     .product-modal {
       max-width: 220px;
-    }
-
-    .modal-img {
-      padding: 12px;
-    }
-
-    .modal-title {
-      font-size: 10px;
-    }
-    
-    .modal-desc {
-      font-size: 9px;
-    }
-    
-    .modal-price {
-      font-size: 12px;
     }
   }
 `
@@ -667,9 +1133,36 @@ export default function Product() {
     return `₹${price.toLocaleString()}`
   }
 
+  // Helper function to get category icon
+  const getCategoryIcon = (categoryId) => {
+    const icons = {
+      all: "🎯",
+      stoves: "🔥",
+      cylinders: "🛢️",
+      accessories: "🔧",
+      safety: "🛡️",
+      kitchen: "🍳"
+    }
+    return icons[categoryId] || "📦"
+  }
+
+  // Helper function to get product count for category
+  const getCategoryCount = (categoryId) => {
+    if (categoryId === "all") return products.length
+    return products.filter(p => p.category === categoryId).length
+  }
+
   return (
     <div className="sh-root" id="products">
       <style>{css}</style>
+      
+      {/* Floating shapes for decoration */}
+      <div className="floating-shapes">
+        <div className="shape shape-1"></div>
+        <div className="shape shape-2"></div>
+        <div className="shape shape-3"></div>
+        <div className="shape shape-4"></div>
+      </div>
 
       <div className="sh-header">
         <div className="sh-title-area">
@@ -682,18 +1175,78 @@ export default function Product() {
         </span>
       </div>
 
-      <div className="sh-toolbar-modern">
-        <div className="sh-categories-modern">
+      {/* New Floating Toolbar Design */}
+      <div className="sh-toolbar-floating">
+        {/* Search Bar - Minimal Style */}
+        <div className="sh-search-minimal">
+          <div className="sh-search-field">
+            <svg className="sh-search-icon-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <circle cx="11" cy="11" r="8"/>
+              <path d="M21 21l-4.35-4.35"/>
+            </svg>
+            <input 
+              type="text" 
+              placeholder="Search products..." 
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              className="sh-search-input-mini"
+            />
+            {search && (
+              <button className="sh-search-clear-mini" onClick={() => setSearch("")}>
+                ✕
+              </button>
+            )}
+          </div>
+        </div>
+
+        {/* Category Grid Cards */}
+        <div className="sh-category-grid">
           {categories.map(c => (
             <button
               key={c.id}
-              className={`sh-pill ${cat === c.id ? "active" : ""}`}
+              className={`sh-category-card ${cat === c.id ? "active" : ""}`}
               onClick={() => setCat(c.id)}
             >
-              {c.name}
+              <div className="sh-category-icon">{getCategoryIcon(c.id)}</div>
+              <div className="sh-category-info">
+                <span className="sh-category-name">{c.name}</span>
+                <span className="sh-category-count">{getCategoryCount(c.id)}</span>
+              </div>
             </button>
           ))}
         </div>
+
+        {/* Active Filters - Chips Style */}
+        {(cat !== "all" || search) && (
+          <div className="sh-filter-chips">
+            <div className="sh-chips-list">
+              <span className="sh-chips-label">Active filters:</span>
+              {cat !== "all" && (
+                <div className="sh-chip">
+                  <span className="sh-chip-icon">{getCategoryIcon(cat)}</span>
+                  <span>{categories.find(c => c.id === cat)?.name}</span>
+                  <button className="sh-chip-remove" onClick={() => setCat("all")}>×</button>
+                </div>
+              )}
+              {search && (
+                <div className="sh-chip">
+                  <span className="sh-chip-icon">🔍</span>
+                  <span>{search}</span>
+                  <button className="sh-chip-remove" onClick={() => setSearch("")}>×</button>
+                </div>
+              )}
+              <button 
+                className="sh-chip-clear"
+                onClick={() => {
+                  setCat("all");
+                  setSearch("");
+                }}
+              >
+                Clear all
+              </button>
+            </div>
+          </div>
+        )}
       </div>
       
       <div className="sh-grid-wrap">
@@ -702,7 +1255,7 @@ export default function Product() {
             <div
               className="sh-card"
               key={item.name}
-              style={{ animationDelay: `${i * 40}ms` }}
+              style={{ animationDelay: `${i * 0.05}s` }}
             >
               <div 
                 className="sh-card-clickable"
@@ -723,7 +1276,6 @@ export default function Product() {
                     alt={item.name}
                     onError={e => { e.target.src = 'https://via.placeholder.com/200?text=IMG' }}
                   />
-                  <div className="sh-img-overlay" />
                 </div>
 
                 <Stars rating={item.rating} />

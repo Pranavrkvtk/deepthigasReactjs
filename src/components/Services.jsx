@@ -4,25 +4,156 @@ const css = `
   @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 
   .sv-root {
-    background: #FAFAF8;
+    position: relative;
     padding: 6rem 0 5rem;
     overflow: hidden;
     font-family: 'Plus Jakarta Sans', sans-serif;
+    background: linear-gradient(135deg, #f5f7fa 0%, #e8edf2 100%);
+  }
+
+  /* Animated Background Pattern */
+  .sv-root::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+      radial-gradient(circle at 20% 50%, rgba(59, 109, 17, 0.03) 0%, transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba(59, 109, 17, 0.03) 0%, transparent 50%),
+      repeating-linear-gradient(45deg, rgba(59, 109, 17, 0.02) 0px, rgba(59, 109, 17, 0.02) 2px, transparent 2px, transparent 8px);
+    pointer-events: none;
+    animation: patternShift 20s linear infinite;
+  }
+
+  @keyframes patternShift {
+    0% {
+      background-position: 0 0;
+    }
+    100% {
+      background-position: 100px 100px;
+    }
+  }
+
+  /* Animated Gradient Orbs */
+  .sv-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+    opacity: 0.3;
+    z-index: 0;
+    animation: floatOrb 15s ease-in-out infinite;
+  }
+
+  .sv-orb-1 {
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, #3B6D11, #A8D55A);
+    top: -150px;
+    right: -100px;
+    animation-delay: 0s;
+  }
+
+  .sv-orb-2 {
+    width: 350px;
+    height: 350px;
+    background: radial-gradient(circle, #5A9E1A, #8BC34A);
+    bottom: -100px;
+    left: -50px;
+    animation-delay: -5s;
+  }
+
+  .sv-orb-3 {
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, #7CB518, #A8D55A);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation-delay: -10s;
+    opacity: 0.2;
+  }
+
+  @keyframes floatOrb {
+    0%, 100% {
+      transform: translate(0, 0) scale(1);
+    }
+    33% {
+      transform: translate(30px, -30px) scale(1.1);
+    }
+    66% {
+      transform: translate(-20px, 20px) scale(0.9);
+    }
+  }
+
+  /* Floating Particles */
+  .sv-particles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .sv-particle {
+    position: absolute;
+    background: rgba(59, 109, 17, 0.1);
+    border-radius: 50%;
+    animation: particleFloat linear infinite;
+  }
+
+  @keyframes particleFloat {
+    0% {
+      transform: translateY(100vh) rotate(0deg);
+      opacity: 0;
+    }
+    10% {
+      opacity: 0.5;
+    }
+    90% {
+      opacity: 0.5;
+    }
+    100% {
+      transform: translateY(-100px) rotate(360deg);
+      opacity: 0;
+    }
   }
 
   .sv-inner {
+    position: relative;
+    z-index: 2;
     max-width: 1180px;
     margin: 0 auto;
     padding: 0 2rem;
   }
 
-  /* ── HEADER ── */
+  /* Glass Morphism Header */
   .sv-head {
     display: flex;
     align-items: flex-end;
     justify-content: space-between;
     margin-bottom: 3.5rem;
     gap: 2rem;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 2rem;
+    border-radius: 32px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    animation: slideInUp 0.6s ease-out;
+  }
+
+  @keyframes slideInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   .sv-label {
@@ -42,6 +173,16 @@ const css = `
     width: 24px; height: 2px;
     background: #3B6D11;
     border-radius: 2px;
+    animation: expandWidth 0.8s ease-out;
+  }
+
+  @keyframes expandWidth {
+    from {
+      width: 0;
+    }
+    to {
+      width: 24px;
+    }
   }
 
   .sv-title {
@@ -52,55 +193,92 @@ const css = `
     color: #111;
     margin: 0;
   }
-  .sv-title span { color: #3B6D11; }
+  .sv-title span { 
+    background: linear-gradient(135deg, #3B6D11, #7CB518);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
 
   .sv-subtitle {
     font-size: 15px;
-    color: #888;
+    color: #666;
     max-width: 320px;
     line-height: 1.65;
     text-align: right;
     font-weight: 400;
   }
 
-  /* ── SERVICE GRID ── */
+  /* Enhanced Service Cards */
   .sv-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 1px;
-    background: #E8E8E4;
-    border: 1px solid #E8E8E4;
-    border-radius: 24px;
-    overflow: hidden;
+    gap: 24px;
     margin-bottom: 4rem;
+    animation: fadeInUp 0.8s ease-out 0.2s both;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   .sv-card {
-    background: #fff;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
     padding: 2rem 1.75rem;
     display: flex;
     flex-direction: column;
     gap: 0;
-    transition: background .2s;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     cursor: default;
     position: relative;
     overflow: hidden;
-    animation: fadeIn .45s ease both;
+    animation: fadeIn 0.45s ease both;
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
   }
 
   .sv-card::before {
     content: '';
     position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 3px;
-    background: linear-gradient(90deg, #3B6D11, #A8D55A);
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #3B6D11, #A8D55A, #3B6D11);
     transform: scaleX(0);
     transform-origin: left;
-    transition: transform .3s ease;
+    transition: transform 0.5s ease;
   }
 
-  .sv-card:hover { background: #F5FAF0; }
+  .sv-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(59, 109, 17, 0.05), rgba(168, 213, 90, 0.05));
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+  }
+
+  .sv-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    background: white;
+  }
   .sv-card:hover::before { transform: scaleX(1); }
+  .sv-card:hover::after { opacity: 1; }
 
   .sv-card:nth-child(1){animation-delay:.05s}
   .sv-card:nth-child(2){animation-delay:.1s}
@@ -118,24 +296,28 @@ const css = `
     letter-spacing: .12em;
     color: #ccc;
     margin-bottom: 1.2rem;
+    transition: color 0.3s;
   }
+  .sv-card:hover .sv-card-num { color: #3B6D11; }
 
   .sv-icon-wrap {
-    width: 48px; height: 48px;
+    width: 48px;
+    height: 48px;
     border-radius: 14px;
-    background: #EAF3DE;
+    background: linear-gradient(135deg, #EAF3DE, #F5FAF0);
     border: 1.5px solid #C8E49A;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 22px;
     margin-bottom: 1.2rem;
-    transition: all .2s;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
   .sv-card:hover .sv-icon-wrap {
-    background: #3B6D11;
+    background: linear-gradient(135deg, #3B6D11, #5A9E1A);
     border-color: #3B6D11;
-    transform: scale(1.05);
+    transform: scale(1.1) rotate(5deg);
+    box-shadow: 0 8px 20px rgba(59, 109, 17, 0.3);
   }
 
   .sv-card-title {
@@ -144,7 +326,9 @@ const css = `
     color: #111;
     margin: 0 0 8px;
     line-height: 1.3;
+    transition: color 0.3s;
   }
+  .sv-card:hover .sv-card-title { color: #3B6D11; }
 
   .sv-card-desc {
     font-size: 13px;
@@ -155,7 +339,8 @@ const css = `
 
   .sv-card-arrow {
     margin-top: 1.5rem;
-    width: 28px; height: 28px;
+    width: 28px;
+    height: 28px;
     border-radius: 50%;
     border: 1.5px solid #E8E8E4;
     display: flex;
@@ -163,12 +348,13 @@ const css = `
     justify-content: center;
     color: #ccc;
     font-size: 13px;
-    transition: all .2s;
+    transition: all 0.3s;
   }
   .sv-card:hover .sv-card-arrow {
     border-color: #3B6D11;
     color: #3B6D11;
-    transform: translate(2px, -2px);
+    transform: translate(4px, -4px);
+    box-shadow: -2px 2px 8px rgba(59, 109, 17, 0.2);
   }
 
   @keyframes fadeIn {
@@ -176,9 +362,15 @@ const css = `
     to   { opacity: 1; transform: translateY(0); }
   }
 
-  /* ── GALLERY SECTION ── */
+  /* Enhanced Gallery Section */
   .sv-gallery-section {
     margin-top: 4rem;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 32px;
+    padding: 2rem;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    animation: fadeInUp 0.8s ease-out 0.4s both;
   }
 
   .sv-gallery-head {
@@ -200,34 +392,42 @@ const css = `
   }
   .sv-gallery-label::before {
     content: '';
-    width: 24px; height: 2px;
+    width: 24px;
+    height: 2px;
     background: #3B6D11;
     border-radius: 2px;
+    animation: expandWidth 0.8s ease-out;
   }
 
-  /* Pagination dots */
+  /* Enhanced Pagination dots */
   .sv-dots {
     display: flex;
-    gap: 6px;
+    gap: 8px;
     align-items: center;
   }
 
   .sv-dot {
-    width: 8px; height: 8px;
+    width: 8px;
+    height: 8px;
     border-radius: 50%;
-    background: #DDD;
+    background: rgba(0, 0, 0, 0.2);
     border: none;
     cursor: pointer;
     padding: 0;
-    transition: all .2s;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
   .sv-dot.active {
     background: #3B6D11;
-    width: 22px;
+    width: 24px;
     border-radius: 4px;
+    box-shadow: 0 0 8px rgba(59, 109, 17, 0.5);
+  }
+  .sv-dot:hover:not(.active) {
+    transform: scale(1.2);
+    background: #A8D55A;
   }
 
-  /* ── GALLERY CARD STRIP ── */
+  /* Enhanced Gallery Cards */
   .sv-gallery-viewport {
     overflow: hidden;
     border-radius: 20px;
@@ -235,7 +435,7 @@ const css = `
 
   .sv-gallery-track {
     display: flex;
-    transition: transform .5s cubic-bezier(.4,0,.2,1);
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .sv-gcard {
@@ -245,9 +445,10 @@ const css = `
     overflow: hidden;
     position: relative;
     height: 240px;
-    background: #F0EEE9;
+    background: linear-gradient(135deg, #f0f0ea, #e8e8e0);
     flex-shrink: 0;
     cursor: pointer;
+    transition: all 0.3s ease;
   }
 
   .sv-gcard img {
@@ -255,141 +456,179 @@ const css = `
     height: 100%;
     object-fit: cover;
     display: block;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   }
-
 
   .sv-gcard-overlay {
     position: absolute;
     inset: 0;
-    background: rgba(0,0,0,0.15);
+    background: linear-gradient(135deg, rgba(59, 109, 17, 0.3), rgba(168, 213, 90, 0.3));
     opacity: 0;
-    border-radius: 16px;
+    transition: opacity 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
-  .sv-gcard:hover .sv-gcard-overlay { opacity: 1; }
 
-  /* ── NAV ARROWS ── */
+  .sv-gcard-overlay::after {
+    content: '🔍';
+    font-size: 32px;
+    color: white;
+    transform: scale(0);
+    transition: transform 0.3s ease;
+  }
+
+  .sv-gcard:hover {
+    transform: scale(1.02);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  }
+  .sv-gcard:hover img { transform: scale(1.1); }
+  .sv-gcard:hover .sv-gcard-overlay { opacity: 1; }
+  .sv-gcard:hover .sv-gcard-overlay::after { transform: scale(1); }
+
+  /* Enhanced Navigation Buttons */
   .sv-gallery-nav {
     display: flex;
-    gap: 8px;
-    margin-top: 16px;
+    gap: 12px;
+    margin-top: 20px;
     justify-content: flex-end;
   }
 
   .sv-nav-btn {
-    width: 40px; height: 40px;
+    width: 44px;
+    height: 44px;
     border-radius: 50%;
-    border: 1.5px solid #E0E0DA;
-    background: #fff;
+    border: none;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(5px);
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 16px;
+    font-size: 18px;
     color: #333;
-    transition: all .2s;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   }
-  .sv-nav-btn:hover {
+  .sv-nav-btn:hover:not(:disabled) {
     background: #3B6D11;
-    border-color: #3B6D11;
     color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(59, 109, 17, 0.3);
   }
   .sv-nav-btn:disabled {
-    opacity: 0.35;
-    cursor: default;
-  }
-  .sv-nav-btn:disabled:hover {
-    background: #fff;
-    border-color: #E0E0DA;
-    color: #333;
+    opacity: 0.4;
+    cursor: not-allowed;
   }
 
-  /* ── LIGHTBOX ── */
+  /* Enhanced Lightbox */
   .sv-lightbox {
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.85);
+    background: rgba(0, 0, 0, 0.9);
+    backdrop-filter: blur(20px);
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 1000;
-    animation: lbIn .2s ease;
+    animation: lbIn 0.3s ease;
   }
   @keyframes lbIn {
-    from { opacity: 0; }
-    to   { opacity: 1; }
+    from { opacity: 0; backdrop-filter: blur(0); }
+    to   { opacity: 1; backdrop-filter: blur(20px); }
   }
 
   .sv-lightbox img {
     max-width: 90vw;
     max-height: 85vh;
-    border-radius: 12px;
+    border-radius: 16px;
     object-fit: contain;
-    animation: lbScale .25s ease;
+    animation: lbScale 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
   }
   @keyframes lbScale {
-    from { transform: scale(0.92); }
-    to   { transform: scale(1); }
+    from { transform: scale(0.9); opacity: 0; }
+    to   { transform: scale(1); opacity: 1; }
   }
 
   .sv-lb-close {
     position: absolute;
-    top: 24px; right: 28px;
-    background: rgba(255,255,255,0.1);
-    border: none;
+    top: 24px;
+    right: 28px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     color: #fff;
     font-size: 22px;
-    width: 40px; height: 40px;
+    width: 44px;
+    height: 44px;
     border-radius: 50%;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: background .2s;
+    transition: all 0.3s;
   }
-  .sv-lb-close:hover { background: rgba(255,255,255,0.2); }
+  .sv-lb-close:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: rotate(90deg);
+  }
 
   .sv-lb-prev, .sv-lb-next {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: rgba(255,255,255,0.1);
-    border: none;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     color: #fff;
     font-size: 20px;
-    width: 48px; height: 48px;
+    width: 52px;
+    height: 52px;
     border-radius: 50%;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: background .2s;
+    transition: all 0.3s;
   }
-  .sv-lb-prev:hover, .sv-lb-next:hover { background: rgba(255,255,255,0.2); }
+  .sv-lb-prev:hover, .sv-lb-next:hover {
+    background: rgba(59, 109, 17, 0.8);
+    transform: translateY(-50%) scale(1.05);
+  }
   .sv-lb-prev { left: 24px; }
   .sv-lb-next { right: 24px; }
 
-  /* ── RESPONSIVE UPDATED: 2 CARDS IN MOBILE GRID ── */
+  /* Responsive Design */
   @media (max-width: 900px) {
     .sv-grid { 
       grid-template-columns: repeat(2, 1fr); 
+      gap: 20px;
     }
     .sv-gcard { 
       flex: 0 0 calc(50% - 6px); 
+      height: 200px;
+    }
+    .sv-head {
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 1.5rem;
+    }
+    .sv-subtitle {
+      text-align: left;
     }
   }
   
   @media (max-width: 600px) {
-    .sv-head { 
-      flex-direction: column; 
-      align-items: flex-start; 
+    .sv-root {
+      padding: 4rem 0 3rem;
     }
-    .sv-subtitle { 
-      text-align: left; 
+    .sv-inner {
+      padding: 0 1rem;
     }
-    /* UPDATED: 2 columns on mobile (was 1 before) */
     .sv-grid { 
       grid-template-columns: repeat(2, 1fr); 
-      gap: 1px;
+      gap: 16px;
     }
     .sv-card {
       padding: 1.5rem 1.25rem;
@@ -406,25 +645,29 @@ const css = `
       font-size: 20px;
       margin-bottom: 1rem;
     }
-    .sv-card-num {
-      font-size: 10px;
-      margin-bottom: 0.9rem;
-    }
     .sv-gcard { 
       flex: 0 0 calc(50% - 6px); 
-      height: 180px;
+      height: 160px;
+    }
+    .sv-gallery-section {
+      padding: 1.5rem;
     }
     .sv-gallery-head {
       flex-direction: column;
       align-items: flex-start;
       gap: 12px;
     }
+    .sv-lb-prev, .sv-lb-next {
+      width: 40px;
+      height: 40px;
+      font-size: 16px;
+    }
   }
 
-  /* Extra small devices - maintain 2 columns */
   @media (max-width: 480px) {
     .sv-grid { 
       grid-template-columns: repeat(2, 1fr); 
+      gap: 12px;
     }
     .sv-card {
       padding: 1.2rem 1rem;
@@ -442,7 +685,13 @@ const css = `
       font-size: 18px;
     }
     .sv-gcard {
-      height: 150px;
+      height: 140px;
+    }
+    .sv-head {
+      padding: 1rem;
+    }
+    .sv-gallery-section {
+      padding: 1rem;
     }
   }
 `;
@@ -467,18 +716,44 @@ const images = [
   "/img7.jpeg",
 ];
 
-const VISIBLE = 3; // cards shown at once
+const VISIBLE = 3;
 
 export default function Services({ services }) {
   const list = services || defaultServices;
 
   const [current, setCurrent]   = useState(0);
-  const [lightbox, setLightbox] = useState(null); // index or null
+  const [lightbox, setLightbox] = useState(null);
 
   const maxIndex = images.length - VISIBLE;
 
   const prev = () => setCurrent(c => Math.max(0, c - 1));
   const next = () => setCurrent(c => Math.min(maxIndex, c + 1));
+
+  // Generate floating particles
+  useEffect(() => {
+    const particlesContainer = document.querySelector('.sv-particles');
+    if (!particlesContainer) return;
+
+    const particleCount = 50;
+    for (let i = 0; i < particleCount; i++) {
+      const particle = document.createElement('div');
+      particle.className = 'sv-particle';
+      const size = Math.random() * 4 + 2;
+      particle.style.width = `${size}px`;
+      particle.style.height = `${size}px`;
+      particle.style.left = `${Math.random() * 100}%`;
+      particle.style.animationDuration = `${Math.random() * 10 + 5}s`;
+      particle.style.animationDelay = `${Math.random() * 5}s`;
+      particle.style.opacity = Math.random() * 0.3;
+      particlesContainer.appendChild(particle);
+    }
+
+    return () => {
+      while (particlesContainer.firstChild) {
+        particlesContainer.removeChild(particlesContainer.firstChild);
+      }
+    };
+  }, []);
 
   // Keyboard nav for lightbox
   useEffect(() => {
@@ -498,8 +773,13 @@ export default function Services({ services }) {
     <section className="sv-root" id="services">
       <style>{css}</style>
 
-      <div className="sv-inner">
+      {/* Animated Background Elements */}
+      <div className="sv-orb sv-orb-1"></div>
+      <div className="sv-orb sv-orb-2"></div>
+      <div className="sv-orb sv-orb-3"></div>
+      <div className="sv-particles"></div>
 
+      <div className="sv-inner">
         {/* HEADER */}
         <div className="sv-head">
           <div>
@@ -509,7 +789,7 @@ export default function Services({ services }) {
           <p className="sv-subtitle">Everything you need for safe, reliable LPG service in Vatakara.</p>
         </div>
 
-        {/* SERVICE CARDS - Now 2 columns on mobile */}
+        {/* SERVICE CARDS */}
         <div className="sv-grid">
           {list.map((s, i) => (
             <div className="sv-card" key={i}>
@@ -568,7 +848,6 @@ export default function Services({ services }) {
             <button className="sv-nav-btn" onClick={next} disabled={current >= maxIndex}>→</button>
           </div>
         </div>
-
       </div>
 
       {/* LIGHTBOX */}

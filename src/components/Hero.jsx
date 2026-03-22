@@ -16,7 +16,7 @@ const styles = `
     border-bottom: 1px solid rgba(37, 99, 235, 0.1);
   }
 
-  /* Animated gradient orbs */
+  /* Animated gradient orbs - adjusted for mobile */
   .hero-wrap .orb {
     position: absolute;
     border-radius: 50%;
@@ -85,19 +85,329 @@ const styles = `
     z-index: 10;
   }
 
-  @media (max-width: 968px) {
+  /* Enhanced Mobile Responsiveness */
+  @media (max-width: 1024px) {
     .hero-inner {
-      grid-template-columns: 1fr;
       gap: 3rem;
-      text-align: center;
     }
-    .hero-wrap { min-height: auto; padding: 5rem 1.5rem 3rem; }
-    .hero-badges { justify-content: center; }
-    .hero-actions { justify-content: center; }
-    .hero-right { display: none; }
-    .hero-title { font-size: clamp(2rem, 6vw, 3.2rem); }
+    .hero-title {
+      font-size: clamp(2rem, 5vw, 3rem);
+    }
+    .hero-desc {
+      font-size: 1rem;
+    }
+    .hero-btn-primary, .hero-btn-outline {
+      padding: 14px 28px;
+      font-size: 0.95rem;
+    }
   }
 
+  @media (max-width: 768px) {
+    .hero-wrap {
+      min-height: auto;
+      padding: 4rem 1rem 3rem;
+    }
+
+    .hero-inner {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+
+    .hero-left {
+      text-align: center;
+      order: 1;
+    }
+
+    .hero-right {
+      order: 2;
+      max-width: 500px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .hero-tag {
+      margin: 0 auto 1.5rem;
+      justify-content: center;
+      width: fit-content;
+      font-size: 11px;
+      padding: 6px 16px;
+    }
+
+    .hero-title {
+      text-align: center;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+
+    .hero-title .gradient-text::after {
+      bottom: 0;
+      height: 6px;
+    }
+
+    .hero-desc {
+      text-align: center;
+      margin: 0 auto 1.5rem;
+      font-size: 0.95rem;
+      max-width: 100%;
+      padding: 0 1rem;
+    }
+
+    .hero-actions {
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 2rem;
+    }
+
+    .hero-btn-primary, .hero-btn-outline {
+      padding: 12px 24px;
+      font-size: 0.9rem;
+      flex: 0 1 auto;
+      min-width: 160px;
+    }
+
+    .hero-badges {
+      justify-content: center;
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-badge-num {
+      font-size: 1.8rem;
+    }
+
+    .hero-badge-label {
+      font-size: 0.75rem;
+    }
+
+    .hero-trust {
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 1.5rem;
+    }
+
+    .hero-trust-item {
+      font-size: 0.8rem;
+    }
+
+    .hero-trust-badge {
+      font-size: 0.75rem;
+      padding: 3px 10px;
+    }
+
+    /* Adjust orbs for mobile */
+    .hero-wrap .orb-1 {
+      width: 250px;
+      height: 250px;
+      top: -80px;
+      right: -80px;
+    }
+
+    .hero-wrap .orb-2 {
+      width: 200px;
+      height: 200px;
+      bottom: -60px;
+      left: -60px;
+    }
+
+    .hero-wrap .orb-3 {
+      width: 180px;
+      height: 180px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero-wrap {
+      padding: 3rem 0.75rem 2rem;
+    }
+
+    .hero-inner {
+      gap: 2rem;
+    }
+
+    .hero-tag {
+      font-size: 9px;
+      padding: 5px 12px;
+      margin-bottom: 1rem;
+    }
+
+    .hero-tag-dot {
+      width: 6px;
+      height: 6px;
+    }
+
+    .hero-title {
+      font-size: clamp(1.5rem, 6vw, 2rem);
+      margin-bottom: 0.75rem;
+    }
+
+    .hero-desc {
+      font-size: 0.85rem;
+      line-height: 1.5;
+      margin-bottom: 1.25rem;
+      padding: 0 0.5rem;
+    }
+
+    .hero-actions {
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 1.5rem;
+      padding: 0 1rem;
+    }
+
+    .hero-btn-primary, .hero-btn-outline {
+      width: 100%;
+      justify-content: center;
+      padding: 12px 20px;
+      font-size: 0.85rem;
+    }
+
+    .hero-badges {
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .hero-badge-num {
+      font-size: 1.5rem;
+    }
+
+    .hero-badge-label {
+      font-size: 0.7rem;
+    }
+
+    .hero-badge-divider {
+      display: none;
+    }
+
+    .hero-trust {
+      gap: 8px;
+      margin-top: 1rem;
+    }
+
+    .hero-trust-item {
+      font-size: 0.7rem;
+      gap: 4px;
+    }
+
+    .hero-trust-item svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    .hero-trust-badge {
+      font-size: 0.7rem;
+      padding: 2px 8px;
+    }
+
+    /* Right side cards mobile optimization */
+    .hero-right {
+      gap: 12px;
+    }
+
+    .hero-card {
+      padding: 1rem;
+      gap: 12px;
+    }
+
+    .hero-card-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+    }
+
+    .hero-card-icon svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    .hero-card-title {
+      font-size: 0.9rem;
+    }
+
+    .hero-card-sub {
+      font-size: 0.7rem;
+    }
+
+    .hero-card-badge {
+      font-size: 0.7rem;
+      padding: 4px 10px;
+    }
+  }
+
+  @media (max-width: 375px) {
+    .hero-card {
+      padding: 0.875rem;
+      gap: 10px;
+    }
+
+    .hero-card-icon {
+      width: 38px;
+      height: 38px;
+    }
+
+    .hero-card-icon svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .hero-card-title {
+      font-size: 0.85rem;
+    }
+
+    .hero-card-sub {
+      font-size: 0.65rem;
+    }
+
+    .hero-card-badge {
+      font-size: 0.65rem;
+      padding: 3px 8px;
+    }
+  }
+
+  /* Tablet landscape optimization */
+  @media (min-width: 769px) and (max-width: 1024px) and (orientation: landscape) {
+    .hero-wrap {
+      padding: 4rem 2rem;
+      min-height: auto;
+    }
+
+    .hero-inner {
+      gap: 2rem;
+    }
+
+    .hero-title {
+      font-size: 2rem;
+    }
+
+    .hero-desc {
+      font-size: 0.9rem;
+    }
+
+    .hero-card {
+      padding: 1.2rem;
+    }
+  }
+
+  /* Touch-friendly improvements */
+  @media (hover: none) and (pointer: coarse) {
+    .hero-btn-primary, 
+    .hero-btn-outline,
+    .hero-card {
+      cursor: default;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .hero-btn-primary:active {
+      transform: scale(0.98);
+    }
+
+    .hero-card:active {
+      transform: scale(0.98);
+      background: white;
+    }
+  }
+
+  /* Rest of your styles remain the same */
   .hero-tag {
     display: inline-flex;
     align-items: center;
