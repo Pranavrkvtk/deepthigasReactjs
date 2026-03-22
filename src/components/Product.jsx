@@ -274,17 +274,17 @@ const css = `
     background: var(--card);
   }
 
-  /* COMPACT POPUP MODAL STYLES */
+  /* EXTRA SMALL POPUP MODAL */
   .product-modal-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(8px);
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 1000;
-    animation: overlayFade 0.3s ease;
+    animation: overlayFade 0.2s ease;
   }
 
   @keyframes overlayFade {
@@ -294,18 +294,19 @@ const css = `
 
   .product-modal {
     background: white;
-    border-radius: 24px;
-    max-width: 380px;
-    width: 90%;
-    animation: modalSlideUp 0.3s cubic-bezier(0.34, 1.2, 0.64, 1);
+    border-radius: 16px;
+    max-width: 260px;
+    width: 80%;
+    animation: modalSlideUp 0.25s cubic-bezier(0.34, 1.2, 0.64, 1);
     position: relative;
     overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
   }
 
   @keyframes modalSlideUp {
     from {
       opacity: 0;
-      transform: translateY(20px) scale(0.96);
+      transform: translateY(15px) scale(0.96);
     }
     to {
       opacity: 1;
@@ -315,15 +316,15 @@ const css = `
 
   .modal-close {
     position: absolute;
-    top: 12px;
-    right: 12px;
+    top: 6px;
+    right: 6px;
     background: rgba(0, 0, 0, 0.05);
     border: none;
-    width: 30px;
-    height: 30px;
+    width: 22px;
+    height: 22px;
     border-radius: 50%;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -343,69 +344,69 @@ const css = `
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 24px;
+    padding: 16px;
   }
 
   .modal-img img {
-    width: 70%;
-    height: 70%;
+    width: 60%;
+    height: 60%;
     object-fit: contain;
   }
 
   .modal-content {
-    padding: 16px 20px 24px;
+    padding: 8px 12px 14px;
   }
 
   .modal-badge {
     display: inline-block;
     font-family: 'DM Mono', monospace;
-    font-size: 9px;
+    font-size: 7px;
     letter-spacing: 1px;
     text-transform: uppercase;
     color: var(--green);
     background: var(--green-dim);
     border: 1px solid var(--border);
-    padding: 3px 8px;
-    border-radius: 4px;
-    margin-bottom: 12px;
+    padding: 2px 5px;
+    border-radius: 3px;
+    margin-bottom: 6px;
   }
 
   .modal-title {
     font-family: 'Syne', sans-serif;
-    font-size: 18px;
+    font-size: 12px;
     font-weight: 700;
     color: var(--ink);
-    margin: 0 0 6px;
+    margin: 0 0 3px;
     line-height: 1.3;
   }
 
   .modal-desc {
-    font-size: 12px;
+    font-size: 10px;
     color: var(--muted);
-    line-height: 1.4;
-    margin-bottom: 12px;
+    line-height: 1.3;
+    margin-bottom: 6px;
   }
 
   .modal-price {
     font-family: 'DM Mono', monospace;
-    font-size: 20px;
+    font-size: 14px;
     font-weight: 600;
     color: var(--green);
-    margin-bottom: 16px;
+    margin-bottom: 8px;
   }
 
   .quantity-selector {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 16px;
-    padding: 10px 0;
+    margin-bottom: 8px;
+    padding: 6px 0;
     border-top: 1px solid var(--border);
     border-bottom: 1px solid var(--border);
   }
 
   .quantity-label {
-    font-size: 13px;
+    font-size: 10px;
     font-weight: 600;
     color: var(--ink);
   }
@@ -413,20 +414,23 @@ const css = `
   .quantity-controls {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 6px;
   }
 
   .qty-btn {
-    width: 30px;
-    height: 30px;
-    border-radius: 8px;
+    width: 22px;
+    height: 22px;
+    border-radius: 5px;
     border: 1.5px solid var(--border);
     background: white;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 12px;
     font-weight: 600;
     transition: all 0.2s;
     touch-action: manipulation;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .qty-btn:hover {
@@ -435,9 +439,9 @@ const css = `
   }
 
   .qty-value {
-    font-size: 16px;
+    font-size: 12px;
     font-weight: 600;
-    min-width: 35px;
+    min-width: 25px;
     text-align: center;
   }
 
@@ -445,19 +449,19 @@ const css = `
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
-    padding: 8px 0;
+    margin-bottom: 10px;
+    padding: 4px 0;
   }
 
   .total-label {
-    font-size: 13px;
+    font-size: 10px;
     font-weight: 600;
     color: var(--ink);
   }
 
   .total-amount {
     font-family: 'DM Mono', monospace;
-    font-size: 18px;
+    font-size: 13px;
     font-weight: 700;
     color: var(--green);
   }
@@ -467,24 +471,24 @@ const css = `
     background: var(--green);
     color: white;
     border: none;
-    border-radius: 12px;
-    padding: 12px;
+    border-radius: 8px;
+    padding: 8px;
     font-family: 'Syne', sans-serif;
-    font-size: 14px;
+    font-size: 11px;
     font-weight: 700;
     cursor: pointer;
     transition: all 0.2s;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
+    gap: 5px;
     touch-action: manipulation;
   }
 
   .modal-add-btn:hover {
     background: #4a7e15;
     transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(90,158,26,0.25);
+    box-shadow: 0 4px 8px rgba(90,158,26,0.2);
   }
 
   @keyframes cardIn {
@@ -493,7 +497,7 @@ const css = `
   }
   .sh-card { animation: cardIn .35s ease both; }
 
-  /* Mobile specific styles for better touch */
+  /* Mobile specific styles */
   @media (max-width: 768px) {
     .sh-header {
       padding: 24px 16px;
@@ -545,39 +549,16 @@ const css = `
       border: 1px solid var(--border);
     }
 
-    .sh-name {
-      font-size: 13px;
-    }
-
-    .sh-desc {
-      font-size: 11px;
-      margin-bottom: 12px;
-    }
-
-    .sh-price {
-      font-size: 13px;
-    }
-
-    .sh-add-btn {
-      padding: 8px 14px;
-      font-size: 11px;
-      min-height: 36px;
-    }
-
     .product-modal {
-      max-width: 340px;
+      max-width: 240px;
     }
 
     .modal-title {
-      font-size: 16px;
+      font-size: 11px;
     }
 
     .modal-price {
-      font-size: 18px;
-    }
-
-    .modal-content {
-      padding: 14px 16px 20px;
+      font-size: 13px;
     }
   }
 
@@ -591,21 +572,23 @@ const css = `
     }
     
     .product-modal {
-      max-width: 320px;
+      max-width: 220px;
     }
 
     .modal-img {
-      padding: 20px;
+      padding: 12px;
     }
 
     .modal-title {
-      font-size: 15px;
-    }
-
-    .sh-add-btn {
-      padding: 6px 12px;
       font-size: 10px;
-      min-height: 32px;
+    }
+    
+    .modal-desc {
+      font-size: 9px;
+    }
+    
+    .modal-price {
+      font-size: 12px;
     }
   }
 `
@@ -657,13 +640,11 @@ export default function Product() {
 
   useEffect(() => { setGridKey(k => k + 1) }, [cat, search])
 
-  // Handle clicking on the product card (opens modal)
   const handleProductClick = (product) => {
     setSelectedProduct(product)
     setQty(1)
   }
 
-  // Handle Add button click
   const handleAddToCart = (e, product) => {
     e.stopPropagation()
     setSelectedProduct(product)
@@ -723,7 +704,6 @@ export default function Product() {
               key={item.name}
               style={{ animationDelay: `${i * 40}ms` }}
             >
-              {/* Card click area - but not on the button */}
               <div 
                 className="sh-card-clickable"
                 onClick={() => handleProductClick(item)}
@@ -775,7 +755,7 @@ export default function Product() {
         </div>
       </div>
 
-      {/* COMPACT PRODUCT POPUP MODAL */}
+      {/* EXTRA SMALL POPUP MODAL */}
       {selectedProduct && (
         <div className="product-modal-overlay" onClick={handleCloseModal}>
           <div className="product-modal" onClick={(e) => e.stopPropagation()}>
@@ -796,7 +776,7 @@ export default function Product() {
               <div className="modal-price">{formatPrice(selectedProduct.price)}</div>
               
               <div className="quantity-selector">
-                <span className="quantity-label">Quantity</span>
+                <span className="quantity-label">Qty</span>
                 <div className="quantity-controls">
                   <button 
                     className="qty-btn"
@@ -820,7 +800,7 @@ export default function Product() {
               </div>
               
               <button className="modal-add-btn" onClick={handleConfirmAdd}>
-                <span>🛒</span> Add to Cart ({qty})
+                <span>🛒</span> Add ({qty})
               </button>
             </div>
           </div>
