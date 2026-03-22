@@ -96,7 +96,7 @@ const styles = `
     .hero-desc {
       font-size: 1rem;
     }
-    .hero-btn-primary, .hero-btn-outline {
+    .hero-btn-primary, .hero-btn-outline, .hero-btn-product {
       padding: 14px 28px;
       font-size: 0.95rem;
     }
@@ -156,9 +156,10 @@ const styles = `
       justify-content: center;
       gap: 12px;
       margin-bottom: 2rem;
+      flex-wrap: wrap;
     }
 
-    .hero-btn-primary, .hero-btn-outline {
+    .hero-btn-primary, .hero-btn-outline, .hero-btn-product {
       padding: 12px 24px;
       font-size: 0.9rem;
       flex: 0 1 auto;
@@ -255,7 +256,7 @@ const styles = `
       padding: 0 1rem;
     }
 
-    .hero-btn-primary, .hero-btn-outline {
+    .hero-btn-primary, .hero-btn-outline, .hero-btn-product {
       width: 100%;
       justify-content: center;
       padding: 12px 20px;
@@ -392,6 +393,7 @@ const styles = `
   @media (hover: none) and (pointer: coarse) {
     .hero-btn-primary, 
     .hero-btn-outline,
+    .hero-btn-product,
     .hero-card {
       cursor: default;
       -webkit-tap-highlight-color: transparent;
@@ -585,8 +587,54 @@ const styles = `
     box-shadow: 0 15px 25px -5px rgba(0, 0, 0, 0.1);
   }
 
+  /* NEW PRODUCT BUTTON STYLE */
+  .hero-btn-product {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: #fff;
+    text-decoration: none;
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 16px 32px;
+    border-radius: 16px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    letter-spacing: 0.02em;
+    box-shadow: 0 10px 25px -5px rgba(16, 185, 129, 0.4);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-btn-product::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s ease;
+  }
+
+  .hero-btn-product:hover::before {
+    left: 100%;
+  }
+
+  .hero-btn-product:hover {
+    background: linear-gradient(135deg, #059669, #047857);
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 20px 30px -5px rgba(16, 185, 129, 0.5);
+  }
+
+  .hero-btn-product:active {
+    transform: translateY(-2px) scale(1.01);
+  }
+
   .hero-btn-primary svg,
-  .hero-btn-outline svg {
+  .hero-btn-outline svg,
+  .hero-btn-product svg {
     width: 20px;
     height: 20px;
     stroke: currentColor;
@@ -596,7 +644,8 @@ const styles = `
   }
 
   .hero-btn-primary:hover svg,
-  .hero-btn-outline:hover svg {
+  .hero-btn-outline:hover svg,
+  .hero-btn-product:hover svg {
     transform: translateX(4px);
   }
 
@@ -898,6 +947,15 @@ function HeroBadges() {
 }
 
 export default function Hero() {
+  // Smooth scroll to products section
+  const scrollToProducts = (e) => {
+    e.preventDefault();
+    const productsSection = document.getElementById('products');
+    if (productsSection) {
+      productsSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <>
       <style>{styles}</style>
@@ -939,6 +997,15 @@ export default function Hero() {
                   <path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/>
                 </svg>
                 View Services
+              </a>
+              {/* NEW PRODUCT BUTTON */}
+              <a className="hero-btn-product" href="#products" onClick={scrollToProducts}>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <circle cx="9" cy="21" r="1"></circle>
+                  <circle cx="20" cy="21" r="1"></circle>
+                  <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                </svg>
+                Shop Products
               </a>
             </div>
 

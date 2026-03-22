@@ -337,19 +337,32 @@ const css = `
   .sh-desc { font-size: 11px; color: var(--muted); margin-bottom: 12px; }
   .sh-footer { display: flex; justify-content: space-between; align-items: center; margin-top: auto; padding-top: 12px; border-top: 1px solid var(--border); }
   .sh-price { font-family: 'DM Mono', monospace; font-size: 16px; font-weight: 600; color: var(--green); }
+  
+  /* REDUCED ADD TO CART BUTTON - Compact Design */
   .sh-add-btn {
     background: linear-gradient(135deg, #5A9E1A, #3a6e0a);
     color: white;
     border: none;
-    border-radius: 10px;
-    padding: 8px 16px;
-    font-weight: 700;
+    border-radius: 8px;
+    padding: 6px 12px;
+    font-size: 11px;
+    font-weight: 600;
     cursor: pointer;
     transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    letter-spacing: 0.3px;
   }
-  .sh-add-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(90,158,26,0.4); }
+  .sh-add-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(90,158,26,0.3);
+  }
+  .sh-add-btn:active {
+    transform: translateY(0);
+  }
 
-  /* ========== CART SIDEBAR (BUY PAGE) ========== */
+  /* ========== CART SIDEBAR ========== */
   .cart-sidebar {
     position: fixed;
     top: 0;
@@ -472,6 +485,10 @@ const css = `
     .sh-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
     .sh-grid-wrap { padding: 16px; }
     .cart-sidebar { width: 100%; right: -100%; }
+    .sh-add-btn {
+      padding: 5px 10px;
+      font-size: 10px;
+    }
   }
 `
 
@@ -532,26 +549,22 @@ export default function ProductCheckout({ externalCartOpen, onCartClose, onCartU
 
   // Sync with external cart open from App
   useEffect(() => {
-    console.log("Product received externalCartOpen:", externalCartOpen)
     if (externalCartOpen) {
-      console.log("Opening cart sidebar from external prop")
       setCartOpen(true)
     }
   }, [externalCartOpen])
 
   // Handle cart close and notify parent
   const handleCartClose = () => {
-    console.log("Closing cart sidebar")
     setCartOpen(false)
     if (onCartClose) {
       onCartClose()
     }
   }
 
-  // Listen for custom open cart event (from Header or other components)
+  // Listen for custom open cart event
   useEffect(() => {
     const handleOpenCart = () => {
-      console.log("Received openCartSidebar event")
       setCartOpen(true)
     }
     window.addEventListener('openCartSidebar', handleOpenCart)
@@ -570,11 +583,8 @@ export default function ProductCheckout({ externalCartOpen, onCartClose, onCartU
   // Save cart to localStorage and notify updates
   useEffect(() => {
     localStorage.setItem("butterfly_cart", JSON.stringify(cart))
-    // Dispatch storage event for Header to update badge
     window.dispatchEvent(new Event('storage'))
-    // Dispatch custom event for cart update
     window.dispatchEvent(new CustomEvent('cartUpdated'))
-    // Notify App to refresh if needed
     if (onCartUpdate) {
       onCartUpdate()
     }
@@ -601,7 +611,6 @@ export default function ProductCheckout({ externalCartOpen, onCartClose, onCartU
       }
       return [...prev, { ...product, quantity }]
     })
-    // Show selected indicator
     setSelectedItemId(product.id)
     setTimeout(() => {
       setSelectedItemId(null)
@@ -658,7 +667,7 @@ export default function ProductCheckout({ externalCartOpen, onCartClose, onCartU
 
       <div className="sh-header">
         <div>
-          <h1 className="sh-title"><em>Butterfly Emporium</em></h1>
+          <h1 className="sh-title"><em>Products</em></h1>
         </div>
         <div className="sh-header-actions">
           <span className="sh-count-pill">{filtered.length} products</span>
@@ -695,11 +704,8 @@ export default function ProductCheckout({ externalCartOpen, onCartClose, onCartU
         <div className="sh-grid">
           {filtered.length > 0 ? filtered.map((item) => (
             <div className="sh-card" key={item.id} onClick={() => setSelectedProduct(item)}>
-              {/* Selected Item Indicator - shows when item is added to cart */}
               {selectedItemId === item.id && (
-                <div className="selected-indicator">
-                  ✓
-                </div>
+                <div className="selected-indicator">✓</div>
               )}
               <div className="sh-img-box"><img src={item.img} alt={item.name} onError={e => e.target.src = 'https://via.placeholder.com/200?text=IMG'} /></div>
               <Stars rating={item.rating} />
@@ -707,7 +713,9 @@ export default function ProductCheckout({ externalCartOpen, onCartClose, onCartU
               <p className="sh-desc">{item.desc}</p>
               <div className="sh-footer">
                 <span className="sh-price">{formatPrice(item.price)}</span>
-                <button className="sh-add-btn" onClick={(e) => handleAddToCartFromCard(e, item)}>+ Add to Cart</button>
+                <button className="sh-add-btn" onClick={(e) => handleAddToCartFromCard(e, item)}>
+                  <span>+</span> Add
+                </button>
               </div>
             </div>
           )) : (
@@ -719,7 +727,7 @@ export default function ProductCheckout({ externalCartOpen, onCartClose, onCartU
         </div>
       </div>
 
-      {/* CART SIDEBAR - BUY / CHECKOUT SECTION */}
+      {/* CART SIDEBAR */}
       <div className={`cart-sidebar ${cartOpen ? 'open' : ''}`}>
         <div className="cart-header">
           <h2>🛒 My Cart</h2>
