@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import Header from "./components/Header";
 import Hero from "./components/Hero";
@@ -151,12 +151,52 @@ export default function App() {
   const [submitted, setSubmitted] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
   const [showSignup, setShowSignup] = useState(false);
+  const [cartItemCount, setCartItemCount] = useState(0);
+  const [cartOpen, setCartOpen] = useState(false);
 
   const services = [
     { title: "Gas Cylinder Delivery", description: "Fast LPG delivery", icon: "🔥" },
     { title: "Gas Stove", description: "High quality stoves", icon: "🍳" },
     { title: "Installation", description: "Safe setup", icon: "🔧" },
   ];
+
+  const trustItems = [
+    "Trusted LPG Services in Vadakara",
+    "Fast Same-Day Delivery",
+    "100% Safety Certified",
+    "HP Gas Dealer Since 1984",
+    "7-Day Customer Support",
+    "10,000+ Happy Customers",
+  ];
+
+  // Update cart count from localStorage
+  const updateCartCount = () => {
+    const savedCart = localStorage.getItem("butterfly_cart");
+    if (savedCart) {
+      const cart = JSON.parse(savedCart);
+      const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+      setCartItemCount(count);
+    } else {
+      setCartItemCount(0);
+    }
+  };
+
+  // Listen for cart updates
+  useEffect(() => {
+    updateCartCount();
+    
+    // Listen for storage events (cart updates from other tabs)
+    window.addEventListener('storage', updateCartCount);
+    
+    // Custom event for cart updates within the same tab
+    const handleCartUpdate = () => updateCartCount();
+    window.addEventListener('cartUpdated', handleCartUpdate);
+    
+    return () => {
+      window.removeEventListener('storage', updateCartCount);
+      window.removeEventListener('cartUpdated', handleCartUpdate);
+    };
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -192,24 +232,17 @@ export default function App() {
     setShowLogin(true);
   };
 
-  const trustItems = [
-    "Trusted LPG Services in Vadakara",
-    "Fast Same-Day Delivery",
-    "100% Safety Certified",
-    "HP Gas Dealer Since 1984",
-    "7-Day Customer Support",
-    "10,000+ Happy Customers",
-  ];
-
   return (
     <>
       <style>{styles}</style>
 
       <div className="app-wrap">
-        {/* Header with both click handlers */}
+        {/* Header with cart count and cart open handler */}
         <Header 
           onLoginClick={() => setShowLogin(true)}
           onSignupClick={() => setShowSignup(true)}
+          cartItemCount={cartItemCount}
+          onCartClick={() => setCartOpen(true)}
         />
 
         {/* LOGIN POPUP */}
@@ -248,7 +281,13 @@ export default function App() {
 
         <main>
           <Hero />
-          <Product />
+          
+          {/* Product component with cart sidebar control - PASS PROPS CORRECTLY */}
+          <Product 
+            externalCartOpen={cartOpen}
+            onCartClose={() => setCartOpen(false)}
+            onCartUpdate={updateCartCount}
+          />
 
           <div className="trust-strip">
             <div className="trust-strip-inner">
