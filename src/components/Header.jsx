@@ -1,4 +1,4 @@
-// Header.js - Updated version with cart badge integration
+// Header.js - Updated version with integrated mobile cart button (no background)
 import { useState } from "react";
 import "./Header.css";
 
@@ -16,6 +16,24 @@ export default function Header({ onLoginClick, onSignupClick, cartItemCount = 0,
           <p className="subtitle">Reliable LPG delivery</p>
         </div>
       </div>
+
+      {/* MOBILE CART BUTTON - Outside nav, always visible */}
+      <button 
+        className="mobile-cart-header-btn"
+        onClick={() => onCartClick && onCartClick()}
+        aria-label="Shopping cart"
+      >
+        <div className="mobile-cart-icon-wrapper">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <circle cx="9" cy="21" r="1" />
+            <circle cx="20" cy="21" r="1" />
+            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
+          </svg>
+          {cartItemCount > 0 && (
+            <span className="mobile-header-cart-badge">{cartItemCount > 99 ? '99+' : cartItemCount}</span>
+          )}
+        </div>
+      </button>
 
       {/* MENU BUTTON */}
       <button
@@ -84,28 +102,6 @@ export default function Header({ onLoginClick, onSignupClick, cartItemCount = 0,
           Contact
         </a>
 
-        {/* CART LINK WITH BADGE */}
-        <button 
-          className="cart-nav-link"
-          onClick={() => {
-            setOpen(false);
-            if (onCartClick) onCartClick();
-          }}
-          style={{ background: 'none', border: 'none', width: '100%', textAlign: 'left', cursor: 'pointer' }}
-        >
-          <div className="cart-icon-wrapper">
-            <svg className="nav-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2">
-              <circle cx="9" cy="21" r="1"></circle>
-              <circle cx="20" cy="21" r="1"></circle>
-              <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
-            </svg>
-            <span>My Cart</span>
-            {cartItemCount > 0 && (
-              <span className="cart-badge">{cartItemCount > 99 ? '99+' : cartItemCount}</span>
-            )}
-          </div>
-        </button>
-
         {/* AUTH BUTTONS */}
         <div className="auth-buttons">
           <button 
@@ -164,19 +160,54 @@ export default function Header({ onLoginClick, onSignupClick, cartItemCount = 0,
       </div>
 
       <style>{`
-        .cart-nav-link {
+        /* Mobile Header Cart Button - No Background */
+        .mobile-cart-header-btn {
+          display: none;
           background: none;
           border: none;
-          width: 100%;
-          text-align: left;
+          width: 44px;
+          height: 44px;
           cursor: pointer;
-          padding: 12px 20px;
+          align-items: center;
+          justify-content: center;
+          transition: all 0.3s ease;
+          margin-right: 8px;
+          color: #2c5e1a;
+        }
+        
+        .mobile-cart-header-btn:active {
+          transform: scale(0.95);
+        }
+        
+        .mobile-cart-icon-wrapper {
+          position: relative;
           display: flex;
           align-items: center;
-          gap: 12px;
-          color: inherit;
-          font-family: inherit;
-          font-size: 16px;
+          justify-content: center;
+        }
+        
+        .mobile-header-cart-badge {
+          position: absolute;
+          top: -10px;
+          right: -12px;
+          background: linear-gradient(135deg, #FFB347, #FF8C00);
+          color: #1e2b0f;
+          font-size: 10px;
+          font-weight: bold;
+          min-width: 18px;
+          height: 18px;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 0 4px;
+          animation: badgePop 0.3s cubic-bezier(0.34, 1.2, 0.64, 1);
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Remove the old cart-nav-link from mobile nav */
+        .cart-nav-link {
+          display: none !important;
         }
         
         .cart-icon-wrapper {
@@ -255,15 +286,37 @@ export default function Header({ onLoginClick, onSignupClick, cartItemCount = 0,
           100% { transform: scale(1); opacity: 1; }
         }
         
+        /* Mobile Styles */
         @media (max-width: 768px) {
           .header-right {
             display: none;
           }
+          
+          .mobile-cart-header-btn {
+            display: flex;
+          }
+          
+          /* Adjust header layout for mobile */
+          .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 16px;
+          }
+          
+          .brand {
+            flex: 1;
+          }
+          
+          .hamburger {
+            order: 3;
+          }
         }
         
+        /* Desktop Styles */
         @media (min-width: 769px) {
-          .cart-nav-link {
-            display: none !important;
+          .mobile-cart-header-btn {
+            display: none;
           }
         }
       `}</style>
