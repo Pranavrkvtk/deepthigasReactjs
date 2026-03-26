@@ -1,9 +1,10 @@
+// src/components/SignUp.jsx
 import { useState } from "react";
+import api from "../services/api";
 
 export default function SignUp({ onSwitchToLogin, onSignupSuccess, onClose }) {
   const [form, setForm] = useState({
-    name: "",
-    email: "",
+    username: "", // Changed from name/email to username
     password: "",
     confirmPassword: "",
   });
@@ -20,7 +21,8 @@ export default function SignUp({ onSwitchToLogin, onSignupSuccess, onClose }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!form.name || !form.email || !form.password || !form.confirmPassword) {
+    // Validation
+    if (!form.username || !form.password || !form.confirmPassword) {
       setError("All fields are required");
       return;
     }
@@ -36,13 +38,35 @@ export default function SignUp({ onSwitchToLogin, onSignupSuccess, onClose }) {
     }
 
     setLoading(true);
-    
-    // Simulate API call
-    setTimeout(() => {
+    setError("");
+
+    try {
+      // Send only username and password to backend
+      const response = await api.signup({
+        username: form.username,
+        password: form.password,
+      });
+
+      // Success handling
+      if (onSignupSuccess) {
+        onSignupSuccess({
+          username: form.username,
+          ...response
+        });
+      }
+      if (onClose) {
+        onClose();
+      }
+    } catch (err) {
+      // Error handling
+      if (err.message.includes("username already exists")) {
+        setError("This username is already taken. Please choose another.");
+      } else {
+        setError(err.message || "Signup failed. Please try again.");
+      }
+    } finally {
       setLoading(false);
-      if (onSignupSuccess) onSignupSuccess(form);
-      if (onClose) onClose();
-    }, 800);
+    }
   };
 
   return (
@@ -53,33 +77,28 @@ export default function SignUp({ onSwitchToLogin, onSignupSuccess, onClose }) {
       <form onSubmit={handleSubmit}>
         <input
           type="text"
-          name="name"
-          placeholder="Full Name"
-          value={form.name}
+          name="username"
+          placeholder="Username"
+          value={form.username}
           onChange={handleChange}
           autoFocus
-        />
-
-        <input
-          type="email"
-          name="email"
-          placeholder="Email Address"
-          value={form.email}
-          onChange={handleChange}
+          disabled={loading}
         />
 
         <div className="password-field">
           <input
             type={showPassword ? "text" : "password"}
             name="password"
-            placeholder="Password"
+            placeholder="Password (min. 6 characters)"
             value={form.password}
             onChange={handleChange}
+            disabled={loading}
           />
           <button 
             type="button" 
             className="toggle-password"
             onClick={() => setShowPassword(!showPassword)}
+            disabled={loading}
           >
             {showPassword ? "🙈" : "👁️"}
           </button>
@@ -92,11 +111,13 @@ export default function SignUp({ onSwitchToLogin, onSignupSuccess, onClose }) {
             placeholder="Confirm Password"
             value={form.confirmPassword}
             onChange={handleChange}
+            disabled={loading}
           />
           <button 
             type="button" 
             className="toggle-password"
             onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+            disabled={loading}
           >
             {showConfirmPassword ? "🙈" : "👁️"}
           </button>
@@ -164,6 +185,11 @@ export default function SignUp({ onSwitchToLogin, onSignupSuccess, onClose }) {
           box-shadow: 0 0 0 3px rgba(37,99,235,0.1);
         }
 
+        input:disabled {
+          background: #f8fafc;
+          cursor: not-allowed;
+        }
+
         .password-field {
           position: relative;
         }
@@ -180,6 +206,11 @@ export default function SignUp({ onSwitchToLogin, onSignupSuccess, onClose }) {
           padding: 0;
         }
 
+        .toggle-password:disabled {
+          cursor: not-allowed;
+          opacity: 0.5;
+        }
+
         .auth-btn {
           background: linear-gradient(135deg, #2563eb, #7c3aed);
           color: white;
@@ -193,12 +224,12 @@ export default function SignUp({ onSwitchToLogin, onSignupSuccess, onClose }) {
           margin-top: 8px;
         }
 
-        .auth-btn:hover {
+        .auth-btn:hover:not(:disabled) {
           transform: translateY(-2px);
           box-shadow: 0 8px 20px rgba(37,99,235,0.3);
         }
 
-        .auth-btn:active {
+        .auth-btn:active:not(:disabled) {
           transform: scale(0.98);
         }
 
@@ -211,6 +242,10 @@ export default function SignUp({ onSwitchToLogin, onSignupSuccess, onClose }) {
           color: #dc2626;
           font-size: 13px;
           text-align: left;
+          background: #fee2e2;
+          padding: 8px 12px;
+          border-radius: 8px;
+          margin-top: 4px;
         }
 
         .switch {

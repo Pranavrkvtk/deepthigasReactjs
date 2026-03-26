@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { AuthProvider } from './contexts/AuthContext'; // Add this import
 
 import Header from "./components/Header";
 import Hero from "./components/Hero";
@@ -233,7 +234,7 @@ export default function App() {
   };
 
   return (
-    <>
+    <AuthProvider> {/* Wrap everything with AuthProvider */}
       <style>{styles}</style>
 
       <div className="app-wrap">
@@ -323,6 +324,6 @@ export default function App() {
         <ChatBot />
         <Footer />
       </div>
-    </>
+    </AuthProvider>
   );
 }
